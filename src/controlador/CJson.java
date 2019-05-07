@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import modelo.MarcaModel;
 import modelo.ProductoModel;
 
 /**

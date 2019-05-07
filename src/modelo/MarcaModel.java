@@ -1,5 +1,8 @@
 package modelo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class MarcaModel extends MarcaClass {
@@ -29,4 +32,22 @@ public class MarcaModel extends MarcaClass {
 		this.list = list;
 	}
 
+	
+	
+public void LoadData() throws SQLException {
+		
+		this.CreateConection();
+		
+		Statement st = this.con.createStatement();
+		ResultSet rs = st.executeQuery("SELECT * FROM `marca`");
+
+		while (rs.next()) { // reads the table line by line
+
+			MarcaModel myMarca = new MarcaModel();
+			myMarca.setId_marca(Integer.parseInt(rs.getString(1)));
+			myMarca.setNombre(rs.getString(2));
+			this.list.add(myMarca);
+		}
+		this.disconnect();
+	}
 }
