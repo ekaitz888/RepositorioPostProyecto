@@ -29,6 +29,11 @@
       console.log(response);
       printProducts(response);
     });
+    var urlmarca='http://localhost:8080/Proyecto_Final/CJsonMarca';
+    $.getJSON(urlmarca,function(response){
+      console.log(response);
+      printMarcas(response);
+    });
 
 
     function printProducts(response){
@@ -49,6 +54,9 @@
         
           $(".row").append(htmlzatia);
       }
+    }
+    function printMarcas(response){
+      
     }
 })
     </script>
