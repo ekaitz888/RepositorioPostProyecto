@@ -7,12 +7,16 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="index.css">
     <title>Hello, world!</title>
   </head>
   <body>
     
-    <div class="container"></div>
+    <div class="container">
+      <div class="row">
+
+      </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -22,23 +26,28 @@
     $(document).ready(function(){
     var url='http://localhost:8080/Proyecto_Final/CJson';
     $.getJSON(url,function(response){
-        console.log(response);
-    }).done(function(){
-        printProducts(response);
+      console.log(response);
+      printProducts(response);
     });
 
 
     function printProducts(response){
       var htmlzatia= '';
       for (i in response){
-        htmlzatia = '<div class="card sm-col-4">';
-        htmlzatia += '<img src="'+response[i].imagen+'" class="card-img-top" alt="'+Response[i].imagen+'">';
+        
+        htmlzatia = '<div class="card col-sm-4">';
+          htmlzatia += '<div class="card-img">';
+        htmlzatia += '<img src="'+response[i].imagen+'" class="card-img-top">';
+        htmlzatia += '</div>';
         htmlzatia += '<div class="card-body">';
-        htmlzatia += '<h1>'+response[i].nombre+'</h1>';
+        htmlzatia += '<h5>'+response[i].nombre+'</h5>';
         htmlzatia += '</div>';
+        htmlzatia += '<div class="footer">';
+          htmlzatia += '<p class="precio">'+response[i].precio+'€</p>';
+        htmlzatia += '<button type="button" class="btn btn-primary">comprar</button>';
         htmlzatia += '</div>';
-
-          $(".container").append(htmlzatia);
+        
+          $(".row").append(htmlzatia);
       }
     }
 })
