@@ -28,7 +28,6 @@ public class CJsonMarca extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -55,7 +54,7 @@ MarcaModel myMarca = new MarcaModel();
  		System.out.print(jsonArray.toString());
 				
  		response.setHeader("Access-Control-Allow-Origin","*"); //json deia denean ez da behar
- 		response.setContentType("application/json");
+ 		response.setContentType("application/json"); // json bihurtzeko erabiltzen da
  		response.setCharacterEncoding("UTF-8");
 	}
 
