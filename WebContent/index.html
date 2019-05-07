@@ -57,12 +57,12 @@
 		$(document)
 				.ready(
 						function() {
-							var url = 'http://localhost:8080/Proyecto_Final/CJson';
+							var url = 'http://localhost:8080/proyecto_final/CJsonMarca';
 							$.getJSON(url, function(response) {
 								console.log(response);
 								printProducts(response);
 							});
-							var urlmarca = 'http://localhost:8080/Proyecto_Final/CJsonMarca';
+							var urlmarca = 'http://localhost:8080/proyecto_final/CJsonMarca';
 							$.getJSON(urlmarca, function(response) {
 								console.log(response);
 								printMarcas(response);
