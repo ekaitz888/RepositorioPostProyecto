@@ -42,6 +42,7 @@ MarcaModel myMarca = new MarcaModel();
 			e.printStackTrace();
 		}
  		
+ 		//Json  arraya sortu
  		ArrayList<JSONObject> jsonArray=new ArrayList<JSONObject>();
  		
  		for (int i=0; i<myMarca.getList().size();i++) {

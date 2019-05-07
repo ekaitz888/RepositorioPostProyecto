@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import modelo.MarcaModel;
+
 import modelo.ProductoModel;
 
 /**
@@ -60,10 +60,10 @@ public class CJsonProducto extends HttpServlet {
  		
 
  		response.getWriter().write(jsonArray.toString());	
- 		System.out.print(jsonArray.toString());
+ 		//System.out.print(jsonArray.toString());
 				
  		response.setHeader("Access-Control-Allow-Origin","*"); //json deia denean ez da behar
- 		response.setContentType("application/json");
+ 		response.setContentType("application/json"); // json bihurtzeko erabiltzen da
  		response.setCharacterEncoding("UTF-8");
  	
  		//END JSON
