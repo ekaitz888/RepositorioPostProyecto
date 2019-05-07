@@ -1,15 +1,34 @@
-.precio{
-    float: left;
-}
+
 button{
     float: right;
 }
-img{
-    width: 100%;
-}
 .logo{
-    width: 100px;
+    width: 210px;
+    float: left;
+    margin-left: 20px;
 }
 .carrito{
     width: 50px;
+}
+.card-img-top{
+    display: flex;
+    flex-grow: 3;
+    
+}
+.card-body{
+    display: flex;
+    flex-grow: 1;
+    
+}
+.content{
+    float: left;
+}
+.background{
+    background-color: grey;
+}
+.nav-wrapper{
+    
+}
+.card{
+    
 }
