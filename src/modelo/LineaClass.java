@@ -33,5 +33,5 @@ public class LineaClass extends Connect{
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	
+	//prueba
 }
