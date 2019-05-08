@@ -1,14 +1,17 @@
 .form{
     width: 33%;
     background-color: white;
-    padding: 50px;
-    
+    padding-left: 50px;
+    padding-bottom: 50px;
+    padding-right: 50px;
+    margin-top: 50px; 
 }
 body{
     background-color: gray;
 }
 .titulo{
     text-align: center;
+    border-bottom: solid black 3px;
 }
 
 .background{
@@ -16,12 +19,13 @@ body{
     justify-content: center;
 }
 .tabla{
-    width: 250px;
+    width: 350px;
     background-color: white;
     display: relative;
     max-height: 400px;
     overflow:scroll;
     margin-left: 100px;
+    margin-top: 100px;
 }
 .card{
     width: 100%;
