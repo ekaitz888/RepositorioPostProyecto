@@ -20,49 +20,54 @@ import modelo.MarcaModel;
 @WebServlet("/CJsonMarca")
 public class CJsonMarca extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CJsonMarca() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public CJsonMarca() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-MarcaModel myMarca = new MarcaModel();
- 		
- 		try {
+		MarcaModel myMarca = new MarcaModel();
+
+		try {
 			myMarca.LoadData();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
- 		
- 		//Json  arraya sortu
- 		ArrayList<JSONObject> jsonArray=new ArrayList<JSONObject>();
- 		
- 		for (int i=0; i<myMarca.getList().size();i++) {
- 			JSONObject jsonObject=new JSONObject();
- 			jsonObject.put("nombre", myMarca.getList().get(i).getNombre());
- 			jsonArray.add(jsonObject);
- 		}
- 		
- 		response.getWriter().write(jsonArray.toString());	
- 		System.out.print(jsonArray.toString());
-				
- 		response.setHeader("Access-Control-Allow-Origin","*"); //json deia denean ez da behar
- 		response.setContentType("application/json"); // json bihurtzeko erabiltzen da
- 		response.setCharacterEncoding("UTF-8");
+
+		// Json arraya sortu
+		ArrayList<JSONObject> jsonArray = new ArrayList<JSONObject>();
+
+		for (int i = 0; i < myMarca.getList().size(); i++) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("nombre", myMarca.getList().get(i).getNombre());
+			jsonArray.add(jsonObject);
+		}
+
+		response.getWriter().write(jsonArray.toString());
+		System.out.print(jsonArray.toString());
+
+		response.setHeader("Access-Control-Allow-Origin", "*"); // json deia denean ez da behar
+		response.setContentType("application/json"); // json bihurtzeko erabiltzen da
+		response.setCharacterEncoding("UTF-8");
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
