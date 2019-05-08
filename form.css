@@ -1,0 +1,32 @@
+.form{
+    width: 33%;
+    background-color: white;
+    padding: 50px;
+    
+}
+body{
+    background-color: gray;
+}
+.titulo{
+    text-align: center;
+}
+
+.background{
+    display: flex;
+    justify-content: center;
+}
+.tabla{
+    width: 250px;
+    background-color: white;
+    display: relative;
+    max-height: 400px;
+    overflow:scroll;
+    margin-left: 100px;
+}
+.card{
+    width: 100%;
+    height: 250px;
+}
+img{
+    width: 100px;
+}
