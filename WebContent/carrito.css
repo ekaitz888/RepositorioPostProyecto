@@ -20,3 +20,9 @@ table{
 body{
     text-align: center;
 }
+.navbar{
+    background-color: white;
+}
+.admin{
+    color: black;
+}

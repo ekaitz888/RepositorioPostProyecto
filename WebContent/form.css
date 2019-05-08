@@ -30,3 +30,14 @@ body{
 img{
     width: 100px;
 }
+.navbar{
+    background-color: white;
+}
+.admin{
+    color: black;
+}
+.logo{
+    width: 210px;
+    float: left;
+    margin-left: 20px;
+}

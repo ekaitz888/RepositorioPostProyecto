@@ -27,6 +27,10 @@ button{
 .background{
     background-color: grey;
 }
-.nav-link{
-    float: right;
+
+.navbar{
+    background-color: white;
+}
+.admin{
+    color: black;
 }

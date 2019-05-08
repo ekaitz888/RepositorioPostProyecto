@@ -16,6 +16,17 @@
 </head>
 
 <body>
+        <nav class="navbar navbar-expand-lg ">
+				<a class="navbar-brandn" href="#"><img class="logo"  src="img/logo.jpg"></a>
+				<div class="collapse navbar-collapse " id="navbarNav">
+					<ul class="navbar-nav">
+					<li class="nav-item active">
+					  <a class="nav-link admin" href="admin.html">Admin<span class="sr-only">(current)</span></a>
+					</li>
+					</ul>
+				</div>
+			  </nav>
+
     <div class="titulo">
         <h1>Datos del usuario</h1>
     </div>
@@ -36,7 +47,8 @@
             <table>
                 <tr>
                     <td>imagen</td>
-                    <td>Nombre</td>
+                    <td>nombre</td>
+                    <td>precio</td>
                 </tr>
                 <tbody></tbody>
             </table>
@@ -68,6 +80,7 @@
                     htmlzatia = '<tr>';
                     htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
                     htmlzatia += '<td>' + response[i].nombre + '</td>';
+                    htmlzatia += '<td>'+response[i].precio+'€</td>';
                     htmlzatia += '</tr>';
                     $('tbody').append(htmlzatia);
                 }
