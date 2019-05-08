@@ -3,12 +3,13 @@ button{
     float: right;
 }
 .logo{
-    width: 210px;
+    width: 250px;
     float: left;
     margin-left: 20px;
 }
 .carrito{
     width: 50px;
+   
 }
 .card-img-top{
     display: flex;
@@ -25,4 +26,7 @@ button{
 }
 .background{
     background-color: grey;
+}
+.nav-link{
+    float: right;
 }
