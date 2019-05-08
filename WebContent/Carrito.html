@@ -9,36 +9,40 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+
     <link rel="stylesheet" href="carrito.css">
-    <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Hello, world!</title>
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-lg ">
-				<a class="navbar-brandn" href="#"><img class="logo"  src="img/logo.jpg"></a>
-				<div class="collapse navbar-collapse " id="navbarNav">
-					<ul class="navbar-nav">
-					<li class="nav-item">
-					  <a class="nav-link admin" href="admin.html">Admin<span class="sr-only">(current)</span></a>
-					</li>
-					</ul>
-				</div>
-			  </nav>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brandn" href="index.html"><img class="logo" src="img/logo.jpg"></a>
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link admin" href="admin.html">Admin<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="tabla">
+        <table>
+            <thead>
+                <tr>
+                    <td>imagen</td>
+                    <td>nombre</td>
+                    <td>cantidad</td>
+                    <td>precio</td>
+                    <td></td>
+                </tr>
+            </thead>
 
-    <table>
-        <thead><tr>
-                <td>imagen</td>
-                <td>nombre</td>
-                <td>precio y cantidad</td>
-                <td></td>
-            </tr></thead>
-        
-        <tbody></tbody>
-    </table>
-    <button type="button" class="button btn-primary">comprar</button>
+            <tbody></tbody>
+        </table>
+        <button type="button" class="button btn-primary">comprar</button>
+    </div>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -49,6 +53,7 @@
     <script>
         $(document).ready(function () {
             var url = 'http://10.22.72.108:8080/proyecto_final/CJson';
+            var num=0;
             $.getJSON(url, function (response) {
                 console.log(response);
                 printProducts(response);
@@ -58,12 +63,13 @@
                 var htmlzatia = '';
                 for (i in response) {
                     htmlzatia += '<tr>';
-                    htmlzatia += '<td><img src="'+response[i].imagen+'"></td>';
-                    htmlzatia += '<td>'+response[i].nombre+'</td>';
+                    htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
+                    htmlzatia += '<td>' + response[i].nombre + '</td>';
+                    htmlzatia += '<td>'+num+'<button type="button" class="button btn-primary">+</button><button type="button" class="button btn-primary">-</button></td>';
+                    htmlzatia += '<td>'+response[i].precio+'€</td>'
                     htmlzatia += '<td><img src="img/x-mark.svg" class="borrar">';
-                    htmlzatia += '<td>'
-                    htmlzatia +='</tr>';
-                    
+                    htmlzatia += '</tr>';
+
                 }
                 $('tbody').html(htmlzatia);
             }

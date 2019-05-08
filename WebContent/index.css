@@ -21,11 +21,17 @@ button{
     flex-grow: 1;
     
 }
+.card{
+    margin-top: 25px;
+}
 .content{
     float: left;
+    background-color: white;
 }
 .background{
     background-color: grey;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .navbar{
@@ -33,4 +39,15 @@ button{
 }
 .admin{
     color: black;
+}
+.lateral{
+    background-color: white;
+    width: 150px;
+    margin-top: 25px;
+    margin-left: 15px;
+    border-radius: 15px;
+    height: 700px;
+}
+.nav-link{
+    margin: 25px;
 }
