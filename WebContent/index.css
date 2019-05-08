@@ -22,11 +22,13 @@ button{
     
 }
 .card{
-    margin-top: 25px;
+    margin-top: 25px; 
 }
 .content{
     float: left;
     background-color: white;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 .background{
     background-color: grey;
@@ -41,13 +43,23 @@ button{
     color: black;
 }
 .lateral{
-    background-color: white;
+    
     width: 150px;
     margin-top: 25px;
     margin-left: 15px;
-    border-radius: 15px;
+    
     height: 700px;
+    
 }
 .nav-link{
     margin: 25px;
+}
+.filtros{
+    text-align: center;
+    border-bottom: solid black 3px;
+}
+.fixed{
+    position: fixed;
+    background-color: white;
+    border-radius: 15px;
 }
