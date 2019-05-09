@@ -54,6 +54,9 @@
     <script>
         $(document).ready(function () {
             var myCarrito = localStorage.getItem("myCarrito");
+            for (i in myCarrito.id_carrito){
+                console.log(myCarrito[i])
+            }
             console.log(myCarrito);
             var url = 'http://10.22.72.108:8080/proyecto_final/CJson';
             var num=0;

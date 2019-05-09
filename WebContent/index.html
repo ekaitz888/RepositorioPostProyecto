@@ -46,7 +46,7 @@
 					<a class="nav-link admin" href="admin.html">Admin<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="Carrito.html"><img class="carrito" src="img/carrito.svg"></a>
+					<a class="nav-link" href="http://10.22.72.108:8080/proyecto_final/CCarrito"><img class="carrito" src="img/carrito.svg"></a>
 				</li>
 			</ul>
 		</div>
@@ -87,6 +87,7 @@
 		$(document)
 			.ready(
 				function () {
+					var id_carrito = 0;
 					var url = 'http://10.22.72.108:8080/proyecto_final/CJson';
 					$.getJSON(url, function (response) {
 						console.log(response);
@@ -103,9 +104,9 @@
 						for (i in response) {
 
 							htmlzatia = '<div class="card col-sm-4" data-id="'+response[i].id_producto+'" data-precio="'+response[i].precio+'">';
-							htmlzatia += '<img  " data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top">';
+							htmlzatia += '<div class="card-img"><img  " data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top"></div>';
 							htmlzatia += '<div class="card-body">';
-							htmlzatia += '<h5>' + response[i].nombre + '</h5>';
+							htmlzatia += '<h1>' + response[i].nombre + '</h1>';
 							htmlzatia += '</div>';
 							htmlzatia += '</div>';
 
@@ -125,16 +126,18 @@
 							$('#comprar').on("click", function(){
 
 								var myCarrito= []; //Array
-
+								
 								var myProducto= [];
 								myProducto.push(id);
 								myProducto.push(precio);
-
 								myCarrito.push(myProducto);
 								console.log(myCarrito);
 								
 								$(".carrito").on("click", function(){
-									localStorage.setItem("myCarrito", myCarrito);
+									for (i in myCarrito){
+									console.log(myCarrito[i]);
+									localStorage.setItem(myCarrito[i]);
+								}
 								})
 							});
 

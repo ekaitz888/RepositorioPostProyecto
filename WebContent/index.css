@@ -2,6 +2,7 @@
 button{
     float: right;
 }
+
 .logo{
     width: 250px;
     float: left;
@@ -10,16 +11,6 @@ button{
 .carrito{
     width: 50px;
    display: none;
-}
-.card-img-top{
-    display: flex;
-    flex-grow: 3;
-    
-}
-.card-body{
-    display: flex;
-    flex-grow: 1;
-    
 }
 .card{
     margin-top: 25px; 
@@ -66,4 +57,7 @@ button{
 }
 .precio{
     float: left;
+}
+.btn-primary{
+    background-color: grey;
 }
