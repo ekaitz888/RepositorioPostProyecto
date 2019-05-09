@@ -39,7 +39,7 @@ public class FacturaModel extends FacturaClass {
 		this.CreateConection();
 		
 		Statement st = this.con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM `producto`");
+		ResultSet rs = st.executeQuery("SELECT * FROM `factura`");
 
 		while (rs.next()) { // reads the table line by line
 

@@ -13,8 +13,8 @@ public class LineaModel extends LineaClass{
 		// TODO Auto-generated constructor stub
 	}
 
-	public LineaModel(int id_linea, int id_producto, double precio) {
-		super(id_linea, id_producto, precio);
+	public LineaModel(int id_linea, int id_producto, double precio, int cantidad) {
+		super(id_linea, id_producto, precio, cantidad);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -36,7 +36,7 @@ public class LineaModel extends LineaClass{
 		this.CreateConection();
 		
 		Statement st = this.con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM `producto`");
+		ResultSet rs = st.executeQuery("SELECT * FROM `linea`");
 
 		while (rs.next()) { // reads the table line by line
 
@@ -44,10 +44,13 @@ public class LineaModel extends LineaClass{
 			myLinea.setId_linea(Integer.parseInt(rs.getString(1)));
 			myLinea.setId_producto(Integer.parseInt(rs.getString(2)));
 			myLinea.setPrecio(Double.parseDouble(rs.getString(3)));
+			myLinea.setCantidad(Integer.parseInt(rs.getString(4)));
 			
 			this.list.add(myLinea);
 		}
 		this.disconnect();
 	}
 	//prueba
+
+	
 }
