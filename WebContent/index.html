@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="index.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>Hello, world!</title>
+	<title>GusPie E-shop</title>
 </head>
 
 <body>
@@ -32,7 +32,8 @@
 					<p>Modal body text goes here.</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">Buy</button>
+					<div class="precio"></div>
+					<button id="comprar" type="button" class="btn btn-primary">Purchase</button>
 				</div>
 			</div>
 		</div>
@@ -102,10 +103,9 @@
 						for (i in response) {
 
 							htmlzatia = '<div class="card col-sm-4">';
-							htmlzatia += '<img  data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top">';
+							htmlzatia += '<img  data-id="'+response[i].id_producto+'" data-precio="'+response[i].precio+'" data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top">';
 							htmlzatia += '<div class="card-body">';
 							htmlzatia += '<h5>' + response[i].nombre + '</h5>';
-							htmlzatia += '<p class="precio">' + response[i].precio + '€</p>';
 							htmlzatia += '</div>';
 							htmlzatia += '</div>';
 
@@ -116,10 +116,24 @@
 						$(".card").on("click", function (response) {
 							var nombreProducto = $(this).children('img').data('nombre');
 							var src = $(this).children('img').data('imagen');
+							var precio = $(this).children('img').data('precio');
 							console.log(nombreProducto);
 							$('.modal').modal('show');
 							$('.modal-title').html(nombreProducto);
 							$('.modal-body').html('<img width="100%" src="' + src + '">');
+							$('.precio').html(precio+"€");
+							$('#comprar').on("click", function(){
+
+								var myCarrito= []; //Array
+
+								var myProducto= '';
+								myProducto += $(this).data('id');
+								myProducto += $(this).data('precio');
+
+								myCarrito.push(myProducto);
+
+
+							});
 
 						});
 					}
@@ -134,7 +148,7 @@
 							htmlzatia = '<div class="row">';
 							htmlzatia += '<div class="col-3">';
 							htmlzatia += '<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">';
-							htmlzatia += '<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">' + response[i].nombre + '</a>';
+							htmlzatia += '<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" data-nombre="'+response[i].nombre+'" aria-selected="true">' + response[i].nombre + '</a>';
 							htmlzatia += '</div>';
 							htmlzatia += '</div>';
 							
