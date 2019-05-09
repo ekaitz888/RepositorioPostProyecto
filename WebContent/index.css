@@ -43,7 +43,9 @@ button{
     color: black;
 }
 .lateral{
-    
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
     width: 150px;
     margin-top: 25px;
     margin-left: 15px;
@@ -59,7 +61,10 @@ button{
     border-bottom: solid black 3px;
 }
 .fixed{
-    position: fixed;
+    
     background-color: white;
     border-radius: 15px;
+}
+.precio{
+    float: left;
 }
