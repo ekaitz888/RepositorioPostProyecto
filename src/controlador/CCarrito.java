@@ -47,6 +47,10 @@ public class CCarrito extends HttpServlet {
 		
 		
 		
+		
+		
+		request.getRequestDispatcher("Carrito.html").forward(request, response);
+		
 	}
 
 	/**

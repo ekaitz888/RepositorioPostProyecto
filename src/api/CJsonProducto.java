@@ -45,7 +45,10 @@ public class CJsonProducto extends HttpServlet {
 			e.printStackTrace();
 		}
 		//START JSON
- 		ArrayList<JSONObject> jsonArray=new ArrayList<JSONObject>();
+ 		ArrayList<JSONObject>
+ 		
+ 		
+ 		jsonArray=new ArrayList<JSONObject>();
  	 	
  		for (int i=0;i<myProduct.getList().size();i++){
  			
@@ -53,7 +56,7 @@ public class CJsonProducto extends HttpServlet {
  			jsonObject.put("id_producto", myProduct.getList().get(i).getId_producto());
  			jsonObject.put("nombre", myProduct.getList().get(i).getNombre());
  			jsonObject.put("precio", myProduct.getList().get(i).getPrecio());
- 			jsonObject.put("id_filtro", myProduct.getList().get(i).getId_filtro());
+ 			jsonObject.put("id_marca", myProduct.getList().get(i).getId_marca());
  			jsonObject.put("imagen", myProduct.getList().get(i).getImagen());
  			
  			jsonArray.add(jsonObject);	

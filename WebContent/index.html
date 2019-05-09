@@ -146,12 +146,12 @@
 
  */
 					function printMarcas(response) {
-						htmlzatia = ''
+						htmlzatia = '';
 						for (i in response) {
 							htmlzatia = '<div class="row">';
 							htmlzatia += '<div class="col-3">';
 							htmlzatia += '<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">';
-							htmlzatia += '<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" data-nombre="'+response[i].nombre+'" aria-selected="true">' + response[i].nombre + '</a>';
+							htmlzatia += '<a  data-id="'+response[i].id_marca+'"class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" data-nombre="'+response[i].nombre+'" aria-selected="true">' + response[i].nombre + '</a>';
 							htmlzatia += '</div>';
 							htmlzatia += '</div>';
 							
@@ -159,6 +159,20 @@
 							$('.lateral').children().append(htmlzatia);
 						}
 					}
+
+					$('#v-pills-home-tab').on("click", function (response){
+						var id=$(this).data('id');
+						htmlzatia= '';
+						for (i in response) {
+						
+							if (response[i].Marca == id){
+
+								htmlzatia += '<div>';
+								htmlzatia += '</div>';
+							}
+
+						}
+					});
 				})
 	</script>
 </body>
