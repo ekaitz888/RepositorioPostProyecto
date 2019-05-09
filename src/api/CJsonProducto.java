@@ -53,7 +53,7 @@ public class CJsonProducto extends HttpServlet {
  			jsonObject.put("id_producto", myProduct.getList().get(i).getId_producto());
  			jsonObject.put("nombre", myProduct.getList().get(i).getNombre());
  			jsonObject.put("precio", myProduct.getList().get(i).getPrecio());
- 			jsonObject.put("id_filtro", myProduct.getList().get(i).getId_filtro());
+ 			jsonObject.put("marca", myProduct.getList().get(i).getId_filtro());
  			jsonObject.put("imagen", myProduct.getList().get(i).getImagen());
  			
  			jsonArray.add(jsonObject);	
