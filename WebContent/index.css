@@ -9,7 +9,7 @@ button{
 }
 .carrito{
     width: 50px;
-   
+   display: none;
 }
 .card-img-top{
     display: flex;
@@ -43,9 +43,7 @@ button{
     color: black;
 }
 .lateral{
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
+   position: relative;
     width: 150px;
     margin-top: 25px;
     margin-left: 15px;
@@ -54,16 +52,17 @@ button{
     
 }
 .nav-link{
-    margin: 25px;
+    margin: 10px;
 }
 .filtros{
     text-align: center;
     border-bottom: solid black 3px;
 }
 .fixed{
-    
+    position: fixed;
     background-color: white;
     border-radius: 15px;
+    padding: 10px;
 }
 .precio{
     float: left;

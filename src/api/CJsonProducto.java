@@ -1,4 +1,4 @@
-package controlador;
+package api;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -50,6 +50,7 @@ public class CJsonProducto extends HttpServlet {
  		for (int i=0;i<myProduct.getList().size();i++){
  			
  			JSONObject jsonObject=new JSONObject();
+ 			jsonObject.put("id_producto", myProduct.getList().get(i).getId_producto());
  			jsonObject.put("nombre", myProduct.getList().get(i).getNombre());
  			jsonObject.put("precio", myProduct.getList().get(i).getPrecio());
  			jsonObject.put("id_filtro", myProduct.getList().get(i).getId_filtro());

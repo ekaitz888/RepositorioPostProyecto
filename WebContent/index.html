@@ -102,8 +102,8 @@
 						var htmlzatia = '';
 						for (i in response) {
 
-							htmlzatia = '<div class="card col-sm-4">';
-							htmlzatia += '<img  data-id="'+response[i].id_producto+'" data-precio="'+response[i].precio+'" data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top">';
+							htmlzatia = '<div class="card col-sm-4" data-id="'+response[i].id_producto+'" data-precio="'+response[i].precio+'">';
+							htmlzatia += '<img  " data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top">';
 							htmlzatia += '<div class="card-body">';
 							htmlzatia += '<h5>' + response[i].nombre + '</h5>';
 							htmlzatia += '</div>';
@@ -111,13 +111,13 @@
 
 
 							$(".row").append(htmlzatia);
-							console.log(response[i].nombre);
 						}
 						$(".card").on("click", function (response) {
+							$(".carrito").fadeIn();
 							var nombreProducto = $(this).children('img').data('nombre');
-							var src = $(this).children('img').data('imagen');
-							var precio = $(this).children('img').data('precio');
-							console.log(nombreProducto);
+							var src = $(this).children("img").data('imagen');
+							var precio = $(this).data('precio');
+							var id = $(this).data("id");
 							$('.modal').modal('show');
 							$('.modal-title').html(nombreProducto);
 							$('.modal-body').html('<img width="100%" src="' + src + '">');
@@ -126,13 +126,16 @@
 
 								var myCarrito= []; //Array
 
-								var myProducto= '';
-								myProducto += $(this).data('id');
-								myProducto += $(this).data('precio');
+								var myProducto= [];
+								myProducto.push(id);
+								myProducto.push(precio);
 
 								myCarrito.push(myProducto);
-
-
+								console.log(myCarrito);
+								
+								$(".carrito").on("click", function(){
+									localStorage.setItem("myCarrito", myCarrito);
+								})
 							});
 
 						});
