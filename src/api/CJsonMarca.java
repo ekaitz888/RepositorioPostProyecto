@@ -50,6 +50,7 @@ public class CJsonMarca extends HttpServlet {
 
 		for (int i = 0; i < myMarca.getList().size(); i++) {
 			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id_marca", myMarca.getList().get(i).getId_marca());
 			jsonObject.put("nombre", myMarca.getList().get(i).getNombre());
 			jsonArray.add(jsonObject);
 		}

@@ -29,6 +29,9 @@ button{
 
 .navbar{
     background-color: white;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
 }
 .admin{
     color: black;
