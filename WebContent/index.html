@@ -46,7 +46,8 @@
 					<a class="nav-link admin" href="admin.html">Admin<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="http://10.22.72.108:8080/proyecto_final/CCarrito"><img class="carrito" src="img/carrito.svg"></a>
+					<a class="nav-link" href="http://10.22.72.108:8080/proyecto_final/CCarrito"><img class="carrito"
+							src="img/carrito.svg"></a>
 				</li>
 			</ul>
 		</div>
@@ -56,9 +57,13 @@
 		<!-- Navbar -->
 
 		<div class="lateral">
-			<div class="fixed"><div class="filtros"><h3>Filtros</h3></div></div>
-			
-			
+			<div class="fixed">
+				<div class="filtros">
+					<h3>Filtros</h3>
+				</div>
+			</div>
+
+
 		</div>
 
 
@@ -103,7 +108,7 @@
 						var htmlzatia = '';
 						for (i in response) {
 
-							htmlzatia = '<div class="card col-sm-4" data-id="'+response[i].id_producto+'" data-precio="'+response[i].precio+'">';
+							htmlzatia = '<div class="card col-sm-4" data-id="' + response[i].id_producto + '" data-precio="' + response[i].precio + '">';
 							htmlzatia += '<div class="card-img"><img  " data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top"></div>';
 							htmlzatia += '<div class="card-body">';
 							htmlzatia += '<h1>' + response[i].nombre + '</h1>';
@@ -122,22 +127,22 @@
 							$('.modal').modal('show');
 							$('.modal-title').html(nombreProducto);
 							$('.modal-body').html('<img width="100%" src="' + src + '">');
-							$('.precio').html(precio+"€");
-							$('#comprar').on("click", function(){
+							$('.precio').html(precio + "€");
+							$('#comprar').on("click", function () {
 
-								var myCarrito= []; //Array
-								
-								var myProducto= [];
+								var myCarrito = []; //Array
+
+								var myProducto = [];
 								myProducto.push(id);
 								myProducto.push(precio);
 								myCarrito.push(myProducto);
 								console.log(myCarrito);
-								
-								$(".carrito").on("click", function(){
-									for (i in myCarrito){
-									console.log(myCarrito[i]);
-									localStorage.setItem(myCarrito[i]);
-								}
+
+								$(".carrito").on("click", function () {
+									for (i in myCarrito) {
+										console.log(myCarrito[i]);
+										localStorage.setItem(myCarrito[i]);
+									}
 								})
 							});
 
@@ -154,26 +159,30 @@
 							htmlzatia = '<div class="row">';
 							htmlzatia += '<div class="col-3">';
 							htmlzatia += '<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">';
-							htmlzatia += '<a  data-id="'+response[i].id_marca+'"class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" data-nombre="'+response[i].nombre+'" aria-selected="true">' + response[i].nombre + '</a>';
+							htmlzatia += '<a  data-id="' + response[i].id_marca + '"class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" data-nombre="' + response[i].nombre + '" aria-selected="true">' + response[i].nombre + '</a>';
 							htmlzatia += '</div>';
 							htmlzatia += '</div>';
-							
+
 
 							$('.lateral').children().append(htmlzatia);
 						}
 					}
 
-					$('#v-pills-home-tab').on("click", function (response){
-						var id=$(this).data('id');
-						htmlzatia= '';
+					$('#v-pills-home-tab').on("click", function (response) {
+						var id = $(this).data('id');
+						htmlzatia = '';
 						for (i in response) {
-						
-							if (response[i].Marca == id){
 
-								htmlzatia += '<div>';
+							if (response[i].id_marca == id) {
+
+								htmlzatia = '<div class="card col-sm-4" data-id="' + response[i].id_producto + '" data-precio="' + response[i].precio + '">';
+								htmlzatia += '<div class="card-img"><img  " data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top"></div>';
+								htmlzatia += '<div class="card-body">';
+								htmlzatia += '<h1>' + response[i].nombre + '</h1>';
+								htmlzatia += '</div>';
 								htmlzatia += '</div>';
 							}
-
+							$(".row").html(htmlzatia);
 						}
 					});
 				})
