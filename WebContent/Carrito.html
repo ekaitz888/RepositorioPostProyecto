@@ -17,7 +17,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brandn" href="index.html"><img class="logo" src="img/logo.jpg"></a>
+        <a class="navbar-brandn" href="index.html"><img class="logo" src="img/gusPieEshop.png"></a>
         <div class="collapse navbar-collapse " id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -54,10 +54,10 @@
     <script>
         $(document).ready(function () {
             var myCarrito = localStorage.getItem("myCarrito");
-
+            var cont = [];
             console.log(myCarrito);
-            var url = 'http://10.22.72.108:8080/proyecto_final/CJson';
-            var num = 0;
+            var url = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
+            
             $.getJSON(url, function (response) {
                 console.log(response);
                 printProducts(response);
@@ -66,12 +66,13 @@
             function printProducts(response) {
                 var htmlzatia = '';
                 for (j in myCarrito) {
+                    cont.push(1);
                     for (i in response) {
                         if (myCarrito[j] == response[i].id_producto) {
                             htmlzatia = '<tr>';
                             htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
                             htmlzatia += '<td>' + response[i].nombre + '</td>';
-                            htmlzatia += '<td>' + num + '<button type="button" class="button btn-primary">+</button><button type="button" class="button btn-primary">-</button></td>';
+                            htmlzatia += '<td><div class="num">' + cont[j] + '<div><button type="button" data-id="'+response[i].id_producto+'" class"sumar button btn-primary">+</button><button type="button" data-id="'+response[i].id_producto+'" class="restar button btn-primary">-</button></td>';
                             htmlzatia += '<td>' + response[i].precio + '€</td>'
                             htmlzatia += '<td><img src="img/x-mark.svg" class="borrar">';
                             htmlzatia += '</tr>';
@@ -79,7 +80,15 @@
                         }
                     }
                 }
-                
+                $('sumar').on("click", function(){
+                    var id = $(this).data("id");
+                    for (i in myCarrito){
+                        if (myCarrito[i].id_producto== id){
+                            cont[i]=cont[i]++;
+                        }
+                    }
+                    
+                })
             }
         })
     </script>

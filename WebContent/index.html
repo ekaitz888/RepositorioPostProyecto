@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	<nav class="navbar navbar-expand-lg">
-		<a class="navbar-brandn" href="index.html"><img class="logo" src="img/logo.jpg"></a>
+		<a class="navbar-brandn" href="index.html"><img class="logo" src="img/gusPieEshop.png"></a>
 		<div class="collapse navbar-collapse " id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item">
@@ -69,7 +69,7 @@
 
 		<div class="container">
 			<!-- Se imprimen aqui los productos -->
-			<div class="row"></div>
+			<div id="productoRow" class="row"></div>
 
 		</div>
 	</div>
@@ -92,7 +92,7 @@
 			.ready(
 				function () {
 					var id_carrito = 0;
-					var url = 'http://10.22.72.108:8080/proyecto_final/CJson';
+					var url = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
 					$.getJSON(url, function (response) {
 						console.log(response);
 						printProducts(response);
@@ -112,9 +112,10 @@
 							htmlzatia += '</div>';
 							htmlzatia += '</div>';
 						}
-						$(".row").html(htmlzatia);
+						$("#productoRow").html(htmlzatia);
+
 						$(".card").on("click", function (response) {
-							$(".carrito").fadeIn();
+							
 							var id = $(this).data("id");
 							//recoger datos del card para el modal
 							var nombreProducto = $(this).children('img').data('nombre');
@@ -142,15 +143,16 @@
 							htmlzatia += '</div>';
 							$('.lateral').children().append(htmlzatia);
 						}
-						$('.marcas').on("click", function (response) {
-							$.getJSON(url + '/?id_marca=' + $(this).data('id'), function (response) {
+						$('.marcas').on("click", function (event) {
+							$.getJSON(url + '?id_marca=' + $(this).data('id'), function (response) {
+								console.log(response);
 								printProducts(Response);
 							})
-							console.log(id);
 							htmlzatia = '';
 						});
 					}
 					$('#comprar').on("click", function () {
+						$(".carrito").fadeIn();
 						var myCarrito = []; //Array bat json objetuak gordetzeko
 						var id = $(this).data("id");
 						if (localStorage.getItem("myCarrito") !== null) {

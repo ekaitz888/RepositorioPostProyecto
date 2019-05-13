@@ -18,7 +18,7 @@ import modelo.ProductoModel;
 /**
  * Servlet implementation class CJson
  */
-@WebServlet("/CJson")
+@WebServlet("/CJsonProducto")
 public class CJsonProducto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,7 +36,6 @@ public class CJsonProducto extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ProductoModel myProduct = new ProductoModel();
-		 
 		
 		try {
 			myProduct.LoadData();
