@@ -144,11 +144,14 @@
 							$('.lateral').children().append(htmlzatia);
 						}
 						$('.marcas').on("click", function (event) {
-							$.getJSON(url + '?id_marca=' + $(this).data('id'), function (response) {
-								console.log(response);
+							var id= $(this).data('id');
+							var llamada= url + '?id_marca=' + id;
+							 $.getJSON(url + '?id_marca=' + $(this).data('id'), function (response) {
 								printProducts(Response);
+								console.log(response);
 							})
-							htmlzatia = '';
+
+							
 						});
 					}
 					$('#comprar').on("click", function () {
