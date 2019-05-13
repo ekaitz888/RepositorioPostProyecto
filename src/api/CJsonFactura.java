@@ -52,6 +52,10 @@ public class CJsonFactura extends HttpServlet {
 					jsonObject.put("id_factura", myFactura.getList().get(i).getId_factura());
 					jsonObject.put("id_linea", myFactura.getList().get(i).getId_linea());
 					jsonObject.put("total", myFactura.getList().get(i).getTotal());
+					jsonObject.put("Nombre", myFactura.getList().get(i).getNombre());
+					jsonObject.put("Apellidos", myFactura.getList().get(i).getApellidos());
+					jsonObject.put("Telefono", myFactura.getList().get(i).getTelefono());
+					jsonObject.put("Direccion", myFactura.getList().get(i).getDireccion());
 					jsonArray.add(jsonObject);
 				}
 
