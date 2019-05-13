@@ -2,6 +2,7 @@ package controlador;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +34,6 @@ public class CCarrito extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		ProductoModel myProduct = new ProductoModel();
-		ArrayList<ProductoModel> list = request.getParameter()
 		try {
 			myProduct.LoadData();
 		} catch (SQLException e) {
