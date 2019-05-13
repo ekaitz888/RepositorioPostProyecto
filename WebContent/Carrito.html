@@ -40,10 +40,10 @@
 
             <tbody></tbody>
         </table>
-        
-        <a href="form.html" ><button type="button" class="button btn-primary">comprar</button></a>
+
+        <a href="form.html"><button type="button" class="button btn-primary">comprar</button></a>
     </div>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -54,12 +54,10 @@
     <script>
         $(document).ready(function () {
             var myCarrito = localStorage.getItem("myCarrito");
-            for (i in myCarrito.id_carrito){
-                console.log(myCarrito[i])
-            }
+
             console.log(myCarrito);
             var url = 'http://10.22.72.108:8080/proyecto_final/CJson';
-            var num=0;
+            var num = 0;
             $.getJSON(url, function (response) {
                 console.log(response);
                 printProducts(response);
@@ -67,17 +65,21 @@
 
             function printProducts(response) {
                 var htmlzatia = '';
-                for (i in response) {
-                    htmlzatia += '<tr>';
-                    htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
-                    htmlzatia += '<td>' + response[i].nombre + '</td>';
-                    htmlzatia += '<td>'+num+'<button type="button" class="button btn-primary">+</button><button type="button" class="button btn-primary">-</button></td>';
-                    htmlzatia += '<td>'+response[i].precio+'€</td>'
-                    htmlzatia += '<td><img src="img/x-mark.svg" class="borrar">';
-                    htmlzatia += '</tr>';
-
+                for (j in myCarrito) {
+                    for (i in response) {
+                        if (myCarrito[j] == response[i].id_producto) {
+                            htmlzatia = '<tr>';
+                            htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
+                            htmlzatia += '<td>' + response[i].nombre + '</td>';
+                            htmlzatia += '<td>' + num + '<button type="button" class="button btn-primary">+</button><button type="button" class="button btn-primary">-</button></td>';
+                            htmlzatia += '<td>' + response[i].precio + '€</td>'
+                            htmlzatia += '<td><img src="img/x-mark.svg" class="borrar">';
+                            htmlzatia += '</tr>';
+                            $('tbody').append(htmlzatia);
+                        }
+                    }
                 }
-                $('tbody').html(htmlzatia);
+                
             }
         })
     </script>
