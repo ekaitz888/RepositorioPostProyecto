@@ -35,8 +35,8 @@ public class CJsonProducto extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int idMarca= Integer.parseInt(request.getParameter("id_marca"));
 		ProductoModel myProduct = new ProductoModel();
-		
 		try {
 			myProduct.LoadData();
 		} catch (SQLException e) {

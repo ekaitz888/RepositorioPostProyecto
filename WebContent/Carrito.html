@@ -80,16 +80,32 @@
                         }
                     }
                 }
-                $('sumar').on("click", function(){
+               
+            }
+            $('sumar').on("click", function(){
                     var id = $(this).data("id");
                     for (i in myCarrito){
                         if (myCarrito[i].id_producto== id){
                             cont[i]=cont[i]++;
+                            console.log(cont[i]);                           
                         }
                     }
-                    
+                    $(this).parent().children("div").html(cont[i]);
+
+
                 })
-            }
+                $('restar').on("click", function(){
+                    var id = $(this).data("id");
+                    for (i in myCarrito){
+                        if (myCarrito[i].id_producto== id){
+                            cont[i]=cont[i]-1;
+                            console.log(cont[i]);                           
+                        }
+                    }
+                    $(this).parent().children("div").html(cont[i]);
+
+
+                })
         })
     </script>
 </body>
