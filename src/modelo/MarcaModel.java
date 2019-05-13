@@ -9,35 +9,50 @@ public class MarcaModel extends MarcaClass {
 
 	ArrayList<MarcaModel> list = new ArrayList<MarcaModel>();
 
+	/**
+		 * 
+		 */
 	public MarcaModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @param id_marca
+	 * @param nombre
+	 */
 	public MarcaModel(int id_marca, String nombre) {
 		super(id_marca, nombre);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @param list
+	 */
 	public MarcaModel(ArrayList<MarcaModel> list) {
 		super();
 		this.list = list;
 	}
 
+	/**
+	 * @return the list
+	 */
 	public ArrayList<MarcaModel> getList() {
 		return list;
 	}
 
+	/**
+	 * @param list
+	 *            the list to set
+	 */
 	public void setList(ArrayList<MarcaModel> list) {
 		this.list = list;
 	}
 
-	
-	
-public void LoadData() throws SQLException {
-		
+	public void LoadData() throws SQLException {
+
 		this.CreateConection();
-		
+
 		Statement st = this.con.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM `marca`");
 

@@ -1,29 +1,60 @@
 package modelo;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class ProductoModel extends ProductoClass{
+public class ProductoModel extends ProductoClass {
 	ArrayList<ProductoModel> list = new ArrayList<ProductoModel>();
-	
+
+	/**
+	 * 
+	 */
 	public ProductoModel() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public ProductoModel(int id_producto, String nombre, int precio, int id_marca, String imagen, ArrayList<ProductoModel> list) {
+	/**
+	 * @param id_producto
+	 * @param nombre
+	 * @param precio
+	 * @param id_marca
+	 * @param imagen
+	 */
+	public ProductoModel(int id_producto, String nombre, double precio, int id_marca, String imagen) {
 		super(id_producto, nombre, precio, id_marca, imagen);
-		this.list=list;
+		// TODO Auto-generated constructor stub
 	}
 
-	
+	/**
+	 * @param list
+	 */
+	public ProductoModel(ArrayList<ProductoModel> list) {
+		super();
+		this.list = list;
+	}
+
+	/**
+	 * @return the list
+	 */
+	public ArrayList<ProductoModel> getList() {
+		return list;
+	}
+
+	/**
+	 * @param list
+	 *            the list to set
+	 */
+	public void setList(ArrayList<ProductoModel> list) {
+		this.list = list;
+	}
 
 	public void LoadData() throws SQLException {
-		
+
 		this.CreateConection();
-		
+
 		Statement st = this.con.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM `producto`");
 
@@ -39,13 +70,4 @@ public class ProductoModel extends ProductoClass{
 		}
 		this.disconnect();
 	}
-	//edit
-	public ArrayList<ProductoModel> getList() {
-		return list;
-	}
-
-	public void setList(ArrayList<ProductoModel> list) {
-		this.list = list;
-	}
-	
 }
