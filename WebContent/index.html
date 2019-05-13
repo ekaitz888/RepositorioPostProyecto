@@ -69,7 +69,7 @@
 
 		<div class="container">
 			<!-- Se imprimen aqui los productos -->
-			<div class="row"></div>
+			<div id="productoRow" class="row"></div>
 
 		</div>
 	</div>
@@ -99,16 +99,17 @@
 						printProducts(response);
 					});
 					var urlmarca = 'http://10.22.72.108:8080/proyecto_final/CJsonMarca';
-					$.getJSON(urlmarca, function (response) {
-						console.log(response);
-						printMarcas(response);
+					$.getJSON(urlmarca, function (data) {
+
+						console.log(data);
+						printMarcas(data);
 					});
 
 					function printProducts(response) {
 						var htmlzatia = '';
 						for (i in response) {
 
-							htmlzatia = '<div class="card col-sm-4" data-id="' + response[i].id_producto + '" data-precio="' + response[i].precio + '">';
+							htmlzatia += '<div class="productocard card col-sm-4" data-idMarca="' + response[i].id_marca + '" data-id="' + response[i].id_producto + '" data-precio="' + response[i].precio + '">';
 							htmlzatia += '<div class="card-img"><img  " data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top"></div>';
 							htmlzatia += '<div class="card-body">';
 							htmlzatia += '<h1>' + response[i].nombre + '</h1>';
@@ -116,9 +117,10 @@
 							htmlzatia += '</div>';
 
 
-							$(".row").append(htmlzatia);
+
 						}
-						$(".card").on("click", function (response) {
+						$("#productoRow").html(htmlzatia);
+						$(".card").on("click", function (event) {
 							$(".carrito").fadeIn();
 							var nombreProducto = $(this).children('img').data('nombre');
 							var src = $(this).children("img").data('imagen');
@@ -153,38 +155,45 @@
 
 
  */
-					function printMarcas(response) {
+					function printMarcas(data) {
 						htmlzatia = '';
-						for (i in response) {
+						for (i in data) {
 							htmlzatia = '<div class="row">';
 							htmlzatia += '<div class="col-3">';
 							htmlzatia += '<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">';
-							htmlzatia += '<a  data-id="' + response[i].id_marca + '"class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" data-nombre="' + response[i].nombre + '" aria-selected="true">' + response[i].nombre + '</a>';
+							htmlzatia += '<a id="marca"  data-id="' + data[i].id_marca + '"class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" data-nombre="' + data[i].nombre + '" aria-selected="true">' + data[i].nombre + '</a>';
 							htmlzatia += '</div>';
 							htmlzatia += '</div>';
 
 
 							$('.lateral').children().append(htmlzatia);
 						}
+						$('#marca').on("click", function (event) {
+							var idMarca = $(this).data('id');
+							console.log(idMarca);
+							htmlzatia = '';
+							$.getJSON(url+'/?id_marca='+idMarca, function (response) {
+								console.log(response);
+								printProducts(response);
+							});
+
+							/* for (i in response) {
+
+			if (response[i].id_marca == idMarca) {
+
+				htmlzatia = '<div class="card col-sm-4" data-id="' + response[i].id_producto + '" data-precio="' + response[i].precio + '">';
+				htmlzatia += '<div class="card-img"><img  " data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top"></div>';
+				htmlzatia += '<div class="card-body">';
+				htmlzatia += '<h1>' + response[i].nombre + '</h1>';
+				htmlzatia += '</div>';
+				htmlzatia += '</div>';
+			}
+			$(".row").html(htmlzatia);
+		} */
+						});
 					}
 
-					$('#v-pills-home-tab').on("click", function (response) {
-						var id = $(this).data('id');
-						htmlzatia = '';
-						for (i in response) {
 
-							if (response[i].id_marca == id) {
-
-								htmlzatia = '<div class="card col-sm-4" data-id="' + response[i].id_producto + '" data-precio="' + response[i].precio + '">';
-								htmlzatia += '<div class="card-img"><img  " data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top"></div>';
-								htmlzatia += '<div class="card-body">';
-								htmlzatia += '<h1>' + response[i].nombre + '</h1>';
-								htmlzatia += '</div>';
-								htmlzatia += '</div>';
-							}
-							$(".row").html(htmlzatia);
-						}
-					});
 				})
 	</script>
 </body>
