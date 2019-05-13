@@ -23,7 +23,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Modal title</h5>
+					<h5 class="modal-title"></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -39,14 +39,14 @@
 		</div>
 	</div>
 	<nav class="navbar navbar-expand-lg">
-		<a class="navbar-brandn" href="index.html"><img class="logo" src="img/gusPieEshop.png"></a>
+		<a class="navbar-brandn" href="index.html"><img class="logo" src="img/logo.jpg"></a>
 		<div class="collapse navbar-collapse " id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="nav-link admin" href="admin.html">Admin<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="http://10.22.72.108:8080/proyecto_final/CCarrito"><img class="carrito"
+					<a class="nav-link" href="http://127.0.0.1:5500/WebContent/carrito.html"><img class="carrito"
 							src="img/carrito.svg"></a>
 				</li>
 			</ul>
@@ -69,7 +69,7 @@
 
 		<div class="container">
 			<!-- Se imprimen aqui los productos -->
-			<div id="productoRow" class="row"></div>
+			<div class="row"></div>
 
 		</div>
 	</div>
@@ -86,7 +86,6 @@
 
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
  -->
 	<script>
 		$(document)
@@ -99,101 +98,77 @@
 						printProducts(response);
 					});
 					var urlmarca = 'http://10.22.72.108:8080/proyecto_final/CJsonMarca';
-					$.getJSON(urlmarca, function (data) {
-
-						console.log(data);
-						printMarcas(data);
+					$.getJSON(urlmarca, function (response) {
+						console.log(response);
+						printMarcas(response);
 					});
-
 					function printProducts(response) {
 						var htmlzatia = '';
 						for (i in response) {
-
-							htmlzatia += '<div class="productocard card col-sm-4" data-idMarca="' + response[i].id_marca + '" data-id="' + response[i].id_producto + '" data-precio="' + response[i].precio + '">';
-							htmlzatia += '<div class="card-img"><img  " data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top"></div>';
+							htmlzatia += '<div class="card col-sm-4" data-id="' + response[i].id_producto + '" data-precio="' + response[i].precio + '">';
+							htmlzatia += '<img data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top">';
 							htmlzatia += '<div class="card-body">';
 							htmlzatia += '<h1>' + response[i].nombre + '</h1>';
 							htmlzatia += '</div>';
 							htmlzatia += '</div>';
-
-
-
 						}
-						$("#productoRow").html(htmlzatia);
-						$(".card").on("click", function (event) {
+						$(".row").html(htmlzatia);
+						$(".card").on("click", function (response) {
 							$(".carrito").fadeIn();
+							var id = $(this).data("id");
+							//recoger datos del card para el modal
 							var nombreProducto = $(this).children('img').data('nombre');
 							var src = $(this).children("img").data('imagen');
 							var precio = $(this).data('precio');
-							var id = $(this).data("id");
+							//rellenar el modal con datos y mostrar el modal
 							$('.modal').modal('show');
 							$('.modal-title').html(nombreProducto);
-							$('.modal-body').html('<img width="100%" src="' + src + '">');
+							$('.modal-body').html('<img  width="100%" src="' + src + '">');
 							$('.precio').html(precio + "€");
-							$('#comprar').on("click", function () {
-
-								var myCarrito = []; //Array
-
-								var myProducto = [];
-								myProducto.push(id);
-								myProducto.push(precio);
-								myCarrito.push(myProducto);
-								console.log(myCarrito);
-
-								$(".carrito").on("click", function () {
-									for (i in myCarrito) {
-										console.log(myCarrito[i]);
-										localStorage.setItem(myCarrito[i]);
-									}
-								})
-							});
-
+							$('#comprar').data('id', id);
+							//
 						});
 					}
 					/* 
-
-
-
  */
-					function printMarcas(data) {
+					function printMarcas(response) {
 						htmlzatia = '';
-						for (i in data) {
+						for (i in response) {
 							htmlzatia = '<div class="row">';
 							htmlzatia += '<div class="col-3">';
-							htmlzatia += '<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">';
-							htmlzatia += '<a id="marca"  data-id="' + data[i].id_marca + '"class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" data-nombre="' + data[i].nombre + '" aria-selected="true">' + data[i].nombre + '</a>';
+							htmlzatia += '<div  data-id="' + response[i].id_marca + '" class="marcas nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">';
+							htmlzatia += '<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" data-nombre="' + response[i].nombre + '" aria-selected="true">' + response[i].nombre + '</a>';
 							htmlzatia += '</div>';
 							htmlzatia += '</div>';
-
-
 							$('.lateral').children().append(htmlzatia);
 						}
-						$('#marca').on("click", function (event) {
-							var idMarca = $(this).data('id');
-							console.log(idMarca);
+						$('.marcas').on("click", function (response) {
+							$.getJSON(url + '/?id_marca=' + $(this).data('id'), function (response) {
+								printProducts(Response);
+							})
+							console.log(id);
 							htmlzatia = '';
-							$.getJSON(url+'/?id_marca='+idMarca, function (response) {
-								console.log(response);
-								printProducts(response);
-							});
-
-							/* for (i in response) {
-
-			if (response[i].id_marca == idMarca) {
-
-				htmlzatia = '<div class="card col-sm-4" data-id="' + response[i].id_producto + '" data-precio="' + response[i].precio + '">';
-				htmlzatia += '<div class="card-img"><img  " data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top"></div>';
-				htmlzatia += '<div class="card-body">';
-				htmlzatia += '<h1>' + response[i].nombre + '</h1>';
-				htmlzatia += '</div>';
-				htmlzatia += '</div>';
-			}
-			$(".row").html(htmlzatia);
-		} */
 						});
 					}
-
-
+					$('#comprar').on("click", function () {
+						var myCarrito = []; //Array bat json objetuak gordetzeko
+						var id = $(this).data("id");
+						if (localStorage.getItem("myCarrito") !== null) {
+							//myCarrito = [];
+							var oldCarritoString = localStorage.getItem("myCarrito");
+							myCarrito = JSON.parse(oldCarritoString);
+							var myObjeto = new Object();  // sortzen dut json objetua
+							myObjeto.id = id;
+							myCarrito.push(myObjeto); // json objetua arrayra eraman
+						} else {
+							//myCarrito = [];
+							var myObjeto = new Object();  // sortzen dut json objetua
+							myObjeto.id = id;
+							myCarrito.push(myObjeto); // json objetua arrayra eraman
+						}
+						var myString = JSON.stringify(myCarrito); // json objetuen array-a string bihurtu
+						localStorage.setItem("myCarrito", myString); // array-a local storgra eraman
+					});
 				})
 	</script>
 </body>
