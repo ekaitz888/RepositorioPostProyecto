@@ -70,6 +70,14 @@ public class CJsonProducto extends HttpServlet {
  		response.setCharacterEncoding("UTF-8");
  	
  		//END JSON
+ 		
+ 		for (int i = 0; i < myProduct.getList().size(); i++) {
+			
+		}
+ 		
+ 		
+ 		
+ 		
 	}
 
 	/**

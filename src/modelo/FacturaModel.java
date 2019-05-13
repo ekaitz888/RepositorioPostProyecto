@@ -10,30 +10,52 @@ public class FacturaModel extends FacturaClass {
 	ArrayList<FacturaModel> list = new ArrayList<FacturaModel>();
 
 	
-	
-	public FacturaModel(ArrayList<FacturaModel> list) {
-		super();
-		this.list = list;
-	}
-
+	/**
+	 * 
+	 */
 	public FacturaModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public FacturaModel(int id_factura, int id_linea, double total) {
-		super(id_factura, id_linea, total);
+	/**
+	 * @param id_factura
+	 * @param id_linea
+	 * @param total
+	 * @param nombre
+	 * @param apellidos
+	 * @param telefono
+	 * @param direccion
+	 */
+	public FacturaModel(int id_factura, int id_linea, double total, String nombre, String apellidos, int telefono,
+			String direccion) {
+		super(id_factura, id_linea, total, nombre, apellidos, telefono, direccion);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @param list
+	 */
+	public FacturaModel(ArrayList<FacturaModel> list) {
+		super();
+		this.list = list;
+	}
+	
+
+	/**
+	 * @return the list
+	 */
 	public ArrayList<FacturaModel> getList() {
 		return list;
 	}
 
+	/**
+	 * @param list the list to set
+	 */
 	public void setList(ArrayList<FacturaModel> list) {
 		this.list = list;
 	}
-	
+
 	public void LoadData() throws SQLException {
 		
 		this.CreateConection();
@@ -47,6 +69,10 @@ public class FacturaModel extends FacturaClass {
 			myFactura.setId_factura(Integer.parseInt(rs.getString(1)));
 			myFactura.setId_linea(Integer.parseInt(rs.getString(2)));
 			myFactura.setTotal(Double.parseDouble(rs.getString(3)));
+			myFactura.setNombre(rs.getString(4));
+			myFactura.setApellidos(rs.getString(5));
+			myFactura.setTelefono(Integer.parseInt(rs.getString(6)));
+			myFactura.setDireccion(rs.getString(7));
 			
 			this.list.add(myFactura);
 		}
