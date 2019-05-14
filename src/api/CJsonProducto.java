@@ -60,7 +60,8 @@ public class CJsonProducto extends HttpServlet {
  			jsonObject.put("imagen", myProduct.getList().get(i).getImagen());
  			
  			jsonArray.add(jsonObject);	
- 			}else if(myProduct.getList().get(i).getId_marca()==Integer.parseInt(idMarca)){
+ 			}else{
+ 				if( myProduct.getList().get(i).getId_marca()==Integer.parseInt(idMarca)) {
  				JSONObject jsonObject=new JSONObject();
  	 			jsonObject.put("id_producto", myProduct.getList().get(i).getId_producto());
  	 			jsonObject.put("nombre", myProduct.getList().get(i).getNombre());
@@ -69,7 +70,8 @@ public class CJsonProducto extends HttpServlet {
  	 			jsonObject.put("imagen", myProduct.getList().get(i).getImagen());
  	 			
  	 			jsonArray.add(jsonObject);
- 	 		}
+ 				}
+ 			}
  		}	
  		
 
