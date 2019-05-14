@@ -36,7 +36,7 @@ public class CJsonProducto extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ProductoModel myProduct = new ProductoModel();
-		String idMarca = (request.getParameter("id_marca"));
+		
 		try {
 			myProduct.LoadData();
 		} catch (SQLException e) {
@@ -77,9 +77,7 @@ public class CJsonProducto extends HttpServlet {
  	
  		//END JSON
  		
- 		for (int i = 0; i < myProduct.getList().size(); i++) {
-			
-		}
+ 		
  		
  		
  		
