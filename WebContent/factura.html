@@ -29,12 +29,11 @@
 
 
     <div class="background">
-<form method="get" action="CInsertForm">
+
         <div class="form col-md-6">
             <div class="titulo">
                 <h1>Datos del usuario</h1>
             </div>
-
 
             Nombre
             <input id="nombre" type="text" textholder="nombre">
@@ -46,7 +45,6 @@
             <input id="direccion" type="text" textholder="48036">
             <button type="button" class="button btn-primary">Meter los datos</button>
         </div>
-
         <div class="tabla">
 
             <table>
@@ -65,7 +63,7 @@
             </table>
         </div>
 
-</form>
+
     </div>
 
 
@@ -77,34 +75,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function () {
-            var myCarrito = localStorage.getItem("myCarrito");
-            var cont = [];
-            console.log(myCarrito);
-            var url = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
-
-            $.getJSON(url, function (response) {
-                console.log(response);
-                printProducts(response);
-            });
-
-            function printProducts(response) {
-                var htmlzatia = '';
-                for (j in myCarrito) {
-                    cont.push(1);
-                    for (i in response) {
-                        if (myCarrito[j] == response[i].id_producto) {
-                            htmlzatia = '<tr>';
-                            htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
-                            htmlzatia += '<td>' + response[i].nombre + '</td>';
-                            htmlzatia += '<td><div class="num">' + cont[j] + '<div></td>';
-                            htmlzatia += '<td>' + response[i].precio + '€</td>'
-                            htmlzatia += '</tr>';
-                            $('tbody').append(htmlzatia);
-                        }
-                    }
-                }
-            }
-        });
+     
+        
     </script>
 </body>

@@ -9,7 +9,6 @@ public class FacturaModel extends FacturaClass {
 
 	ArrayList<FacturaModel> list = new ArrayList<FacturaModel>();
 
-	
 	/**
 	 * 
 	 */
@@ -40,7 +39,6 @@ public class FacturaModel extends FacturaClass {
 		super();
 		this.list = list;
 	}
-	
 
 	/**
 	 * @return the list
@@ -50,16 +48,21 @@ public class FacturaModel extends FacturaClass {
 	}
 
 	/**
-	 * @param list the list to set
+	 * @param list
+	 *            the list to set
 	 */
 	public void setList(ArrayList<FacturaModel> list) {
 		this.list = list;
 	}
 
+	/**
+	 * @Description Hace un select data de la base de datos
+	 * @throws SQLException
+	 */
 	public void LoadData() throws SQLException {
-		
+
 		this.CreateConection();
-		
+
 		Statement st = this.con.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM `factura`");
 
@@ -73,10 +76,23 @@ public class FacturaModel extends FacturaClass {
 			myFactura.setApellidos(rs.getString(5));
 			myFactura.setTelefono(Integer.parseInt(rs.getString(6)));
 			myFactura.setDireccion(rs.getString(7));
-			
+
 			this.list.add(myFactura);
 		}
 		this.disconnect();
 	}
-	
+	/**
+	 * @Description Se usa para hacer un insert de datos en factura
+	 * @throws SQLException
+	 */
+	public void insertData() throws SQLException {
+
+		this.CreateConection();
+
+		Statement st = this.con.createStatement();
+		st.executeUpdate("INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`) VALUES ("+this.getTotal()+",'"+this.getNombre()+"','"+this.getApellidos()+"',"+this.getTelefono()+",'"+this.getDireccion()+"')");
+
+		this.disconnect();
+	}
+
 }
