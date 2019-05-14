@@ -55,6 +55,7 @@
                     <tr>
                         <td>imagen</td>
                         <td>nombre</td>
+                        <td>cantidad</td>
                         <td>precio</td>
                     </tr>
                 </thead>
@@ -94,9 +95,8 @@
                             htmlzatia = '<tr>';
                             htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
                             htmlzatia += '<td>' + response[i].nombre + '</td>';
-                            htmlzatia += '<td><div class="num">' + cont[j] + '<div><button type="button" data-id="' + response[i].id_producto + '" class"sumar button btn-primary">+</button><button type="button" data-id="' + response[i].id_producto + '" class="restar button btn-primary">-</button></td>';
+                            htmlzatia += '<td><div class="num">' + cont[j] + '<div></td>';
                             htmlzatia += '<td>' + response[i].precio + '€</td>'
-                            htmlzatia += '<td><img src="img/x-mark.svg" class="borrar">';
                             htmlzatia += '</tr>';
                             $('tbody').append(htmlzatia);
                         }
