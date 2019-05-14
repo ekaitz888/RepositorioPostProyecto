@@ -105,7 +105,7 @@
 					function printProducts(response) {
 						var htmlzatia = '';
 						for (i in response) {
-							htmlzatia += '<div class="card col-sm-4" data-id="' + response[i].id_producto + '" data-precio="' + response[i].precio + '">';
+							htmlzatia += '<div class="card col-sm-4" data-idMarca="' + response[i].id_marca + '" data-id="' + response[i].id_producto + '" data-precio="' + response[i].precio + '">';
 							htmlzatia += '<img data-imagen="' + response[i].imagen + '" data-nombre="' + response[i].nombre + '" src="' + response[i].imagen + '" class="card-img-top">';
 							htmlzatia += '<div class="card-body">';
 							htmlzatia += '<h1>' + response[i].nombre + '</h1>';
@@ -115,7 +115,7 @@
 						$("#productoRow").html(htmlzatia);
 
 						$(".card").on("click", function (response) {
-							
+
 							var id = $(this).data("id");
 							//recoger datos del card para el modal
 							var nombreProducto = $(this).children('img').data('nombre');
@@ -144,14 +144,18 @@
 							$('.lateral').children().append(htmlzatia);
 						}
 						$('.marcas').on("click", function (event) {
-							var id= $(this).data('id');
-							var llamada= url + '?id_marca=' + id;
-							 $.getJSON(url + '?id_marca=' + $(this).data('id'), function (response) {
-								printProducts(Response);
-								console.log(response);
-							})
 
-							
+							var id = $(this).data('id');
+							$('[data-idMarca="'+id+'"]').show();
+							$('.card[data-idMarca!="'+id+'"]').hide();
+							  
+							/* var llamada = url + '?id_marca=' + id;
+							$.getJSON(url, function (response) {
+								
+								console.log(response);
+							}) */
+
+
 						});
 					}
 					$('#comprar').on("click", function () {
@@ -174,6 +178,7 @@
 						var myString = JSON.stringify(myCarrito); // json objetuen array-a string bihurtu
 						localStorage.setItem("myCarrito", myString); // array-a local storgra eraman
 					});
+
 				})
 	</script>
 </body>
