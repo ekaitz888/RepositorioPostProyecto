@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    
     <link rel="stylesheet" href="carrito.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Hello, world!</title>
@@ -51,13 +51,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+        
     <script>
         $(document).ready(function () {
             var myCarrito = localStorage.getItem("myCarrito");
             var cont = [];
             console.log(myCarrito);
             var url = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
-            
+
             $.getJSON(url, function (response) {
                 console.log(response);
                 printProducts(response);
@@ -72,7 +73,12 @@
                             htmlzatia = '<tr>';
                             htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
                             htmlzatia += '<td>' + response[i].nombre + '</td>';
-                            htmlzatia += '<td><div class="num">' + cont[j] + '<div><button type="button" data-id="'+response[i].id_producto+'" class"sumar button btn-primary">+</button><button type="button" data-id="'+response[i].id_producto+'" class="restar button btn-primary">-</button></td>';
+                            htmlzatia += '<td><div class="cantidad"  data-id="' + response[i].id_producto + '">';
+                            htmlzatia += '<div class="num">' + cont[j] + '</div>';
+                            htmlzatia += '<div class="sumar caja">+</div>';
+                            htmlzatia += '<div class="restar disabled caja">-</div>';
+                            htmlzatia += '</div>';
+                            htmlzatia += '</td>';
                             htmlzatia += '<td>' + response[i].precio + '€</td>'
                             htmlzatia += '<td><img src="img/x-mark.svg" class="borrar">';
                             htmlzatia += '</tr>';
@@ -80,32 +86,42 @@
                         }
                     }
                 }
-               
+                $('.sumar').on("click", function () {
+
+                    var id = $(this).parent().data("id");
+                    console.log(id);
+                    for (i in myCarrito) {
+
+                        if (myCarrito[i] == id) {
+                            cont[i] = cont[i] + 1;
+                            console.log(cont[i]);
+                        }
+                    }
+                   $(this).parent('.cantidad').children('.num').html(cont[i]);
+
+
+                })
+                $('.restar').on("click", function () {
+                    var id = $(this).parent().data("id");
+                    console.log(id);
+                    for (i in myCarrito) {
+                        if (myCarrito[i] == id) {
+                            cont[i] = cont[i] - 1;
+                            if (cont[i] == 1) {
+                                $(this).addClass('disabled');
+                            }
+                            console.log(cont[i]);
+                        }
+                    }
+                    $(this).parent('.cantidad').children(".num").html(cont[i]);
+
+
+                })
+                $('.borrar').on("click", function () {
+
+                })
             }
-            $('sumar').on("click", function(){
-                    var id = $(this).data("id");
-                    for (i in myCarrito){
-                        if (myCarrito[i].id_producto== id){
-                            cont[i]=cont[i]++;
-                            console.log(cont[i]);                           
-                        }
-                    }
-                    $(this).parent().children("div").html(cont[i]);
 
-
-                })
-                $('restar').on("click", function(){
-                    var id = $(this).data("id");
-                    for (i in myCarrito){
-                        if (myCarrito[i].id_producto== id){
-                            cont[i]=cont[i]-1;
-                            console.log(cont[i]);                           
-                        }
-                    }
-                    $(this).parent().children("div").html(cont[i]);
-
-
-                })
         })
     </script>
 </body>

@@ -38,3 +38,16 @@ body{
     display: flex;
 
 }
+.caja{
+    width: 33%;
+    background-color: rgb(194, 194, 194);
+    text-align: center;
+    border: solid 1px black;
+}
+.caja:hover{
+    cursor: pointer;
+}
+.cantidad{
+    display: flex;
+    flex-wrap: nowrap;
+}
