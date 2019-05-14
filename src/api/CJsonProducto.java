@@ -50,7 +50,7 @@ public class CJsonProducto extends HttpServlet {
  		jsonArray=new ArrayList<JSONObject>();
  	 	
  		for (int i=0;i<myProduct.getList().size();i++){
- 			if (idMarca == "") {
+ 			
  				
  			JSONObject jsonObject=new JSONObject();
  			jsonObject.put("id_producto", myProduct.getList().get(i).getId_producto());
@@ -60,16 +60,7 @@ public class CJsonProducto extends HttpServlet {
  			jsonObject.put("imagen", myProduct.getList().get(i).getImagen());
  			
  			jsonArray.add(jsonObject);	
- 			}else if(myProduct.getList().get(i).getId_marca()==Integer.parseInt(idMarca)){
- 				JSONObject jsonObject=new JSONObject();
- 	 			jsonObject.put("id_producto", myProduct.getList().get(i).getId_producto());
- 	 			jsonObject.put("nombre", myProduct.getList().get(i).getNombre());
- 	 			jsonObject.put("precio", myProduct.getList().get(i).getPrecio());
- 	 			jsonObject.put("id_marca", myProduct.getList().get(i).getId_marca());
- 	 			jsonObject.put("imagen", myProduct.getList().get(i).getImagen());
- 	 			
- 	 			jsonArray.add(jsonObject);
- 	 		}
+ 			
  		}	
  		
 
