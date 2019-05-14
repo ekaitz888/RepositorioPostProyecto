@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+
     <link rel="stylesheet" href="carrito.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Hello, world!</title>
@@ -26,22 +26,27 @@
             </ul>
         </div>
     </nav>
-    <div class="tabla">
-        <table>
-            <thead>
-                <tr>
-                    <td>imagen</td>
-                    <td>nombre</td>
-                    <td>cantidad</td>
-                    <td>precio</td>
-                    <td></td>
-                </tr>
-            </thead>
+    <div class="cuerpo">
+        <div class="tabla">
+            <table>
+                <thead>
+                    <tr>
+                        <td>imagen</td>
+                        <td>nombre</td>
+                        <td>cantidad</td>
+                        <td>precio</td>
+                        <td></td>
+                    </tr>
+                </thead>
 
-            <tbody></tbody>
-        </table>
+                <tbody></tbody>
+            </table>
 
-        <a href="form.html"><button type="button" class="button btn-primary">comprar</button></a>
+        </div>
+        <div class="footer">
+            <a href="form.html"><button type="button" class="button btn-primary">comprar</button></a>
+            <div class="total"></div>
+        </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -51,25 +56,31 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-        
+
     <script>
         $(document).ready(function () {
+            //variables
             var myCarrito = localStorage.getItem("myCarrito");
             var cont = [];
+            var total = 0;
+            var totalProducto = [];
             console.log(myCarrito);
+            //getJeson
             var url = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
-
             $.getJSON(url, function (response) {
                 console.log(response);
                 printProducts(response);
             });
-
+            //Imprimir productos
             function printProducts(response) {
                 var htmlzatia = '';
                 for (j in myCarrito) {
                     cont.push(1);
                     for (i in response) {
+
                         if (myCarrito[j] == response[i].id_producto) {
+                            total = total + response[i].precio;
+                            totalProducto.push(response[i].precio);
                             htmlzatia = '<tr>';
                             htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
                             htmlzatia += '<td>' + response[i].nombre + '</td>';
@@ -79,34 +90,66 @@
                             htmlzatia += '<div class="restar disabled caja">-</div>';
                             htmlzatia += '</div>';
                             htmlzatia += '</td>';
-                            htmlzatia += '<td>' + response[i].precio + '€</td>'
+                            htmlzatia += '<td class="precio">' + response[i].precio + '€</td>'
                             htmlzatia += '<td><img src="img/x-mark.svg" class="borrar">';
                             htmlzatia += '</tr>';
                             $('tbody').append(htmlzatia);
                         }
                     }
                 }
+                //ImprimirTotal
+                $('.total').html('<b>' + total + '€</b>');
+                //Sumar Cantidad
                 $('.sumar').on("click", function () {
-
+                    var suma=[];
+                    var num = 0;
                     var id = $(this).parent().data("id");
-                    console.log(id);
-                    for (i in myCarrito) {
+                    //console.log(id);
+                    for (i in response) {
+                        
+                        if (response[i].id_producto == id) {
+                            num=i;
+                            /* console.log(num);
+                            console.log(response[num].precio); */
 
-                        if (myCarrito[i] == id) {
-                            cont[i] = cont[i] + 1;
-                            console.log(cont[i]);
                         }
                     }
-                   $(this).parent('.cantidad').children('.num').html(cont[i]);
+                    
+                    for (i in myCarrito) {
+                        
+                        if (myCarrito[i] == id) {
+                            cont[i] = cont[i] + 1;
+                            /* console.log(cont[i]);
+                            console.log(response[num].precio);  
+                            console.log(total);  */                      
+                            suma[id]=(response[num].precio*cont[i]);
+                            $(this).parent().parent().siblings('.precio').html(suma[id]+'€');
+                            console.log(suma[id])
+                            total=total+response[num].precio;
+                            console.log(total);
+                            
+                           /*  console.log(cont[i]); */
+                            
+                            $(this).parent('.cantidad').children('.num').html(cont[i]);
+                            
+                        }
+                        
+                    }
+                    $(this).closest('.tabla').siblings('.footer').children(".total").html(total+'€');
+                    
+                    
 
 
                 })
+
+                //restar cantidad
                 $('.restar').on("click", function () {
                     var id = $(this).parent().data("id");
                     console.log(id);
                     for (i in myCarrito) {
                         if (myCarrito[i] == id) {
                             cont[i] = cont[i] - 1;
+                            total
                             if (cont[i] == 1) {
                                 $(this).addClass('disabled');
                             }
@@ -117,6 +160,8 @@
 
 
                 })
+
+                //Borrar producto
                 $('.borrar').on("click", function () {
 
                 })

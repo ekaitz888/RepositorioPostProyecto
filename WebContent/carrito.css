@@ -8,7 +8,6 @@ img{
 }
 .tabla{
     width: 1000;
-    margin: 25px;
     background-color: white;
 }
 table{
@@ -50,4 +49,16 @@ body{
 .cantidad{
     display: flex;
     flex-wrap: nowrap;
+}
+.footer{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.cuerpo{
+    margin: 25px;
+}
+.total{
+    font-size: 50px;
 }

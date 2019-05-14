@@ -32,7 +32,15 @@ public class CCarrito extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		ProductoModel list = new ProductoModel();
+		ArrayList<ProductoModel> myCarrito = new ArrayList<ProductoModel>();
+		String idProducto = request.getParameter("myCarrito");
+		try {
+			list.LoadData();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
