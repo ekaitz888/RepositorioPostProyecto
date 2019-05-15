@@ -126,7 +126,7 @@
 							$('.modal-title').html(nombreProducto);
 							$('.modal-body').html('<img  width="100%" src="' + src + '">');
 							$('.precio').html(precio + "€");
-							$('#comprar').data('id', id);
+							$('#comprar').data('idCompra', id);
 							//
 						});
 					}
@@ -146,9 +146,9 @@
 						$('.marcas').on("click", function (event) {
 
 							var id = $(this).data('id');
-							$('[data-idMarca="'+id+'"]').show();
-							$('.card[data-idMarca!="'+id+'"]').hide();
-							  
+							$('[data-idMarca="' + id + '"]').show();
+							$('.card[data-idMarca!="' + id + '"]').hide();
+
 							/* var llamada = url + '?id_marca=' + id;
 							$.getJSON(url, function (response) {
 								
@@ -161,7 +161,10 @@
 					$('#comprar').on("click", function () {
 						$(".carrito").fadeIn();
 						var myCarrito = []; //Array bat json objetuak gordetzeko
-						var id = $(this).data("id");
+						var id = $(this).data("idCompra");
+						var list = [];
+						console.log(id);
+
 						if (localStorage.getItem("myCarrito") !== null) {
 							//myCarrito = [];
 							var oldCarritoString = localStorage.getItem("myCarrito");
@@ -169,12 +172,25 @@
 							var myObjeto = new Object();  // sortzen dut json objetua
 							myObjeto.id = id;
 							myCarrito.push(myObjeto); // json objetua arrayra eraman
+							list.push(id);
 						} else {
+							for (i in list) {
+								if (list[i] == id) {
+									alert("este producto ya fue seleccionado");
+								} else {
+									var myObjeto = new Object();  // sortzen dut json objetua
+									myObjeto.id = id;
+									myCarrito.push(myObjeto); // json objetua arrayra eraman
+									list.push();
+									console.log(list);
+								}
+
+							}
 							//myCarrito = [];
-							var myObjeto = new Object();  // sortzen dut json objetua
-							myObjeto.id = id;
-							myCarrito.push(myObjeto); // json objetua arrayra eraman
+
 						}
+
+						console.log(myCarrito);
 						var myString = JSON.stringify(myCarrito); // json objetuen array-a string bihurtu
 						localStorage.setItem("myCarrito", myString); // array-a local storgra eraman
 					});

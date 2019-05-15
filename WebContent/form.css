@@ -5,6 +5,7 @@
     padding-bottom: 50px;
     padding-right: 50px;
     margin-top: 50px; 
+    margin-bottom: 50px;
 }
 body{
     background-color: gray;
@@ -14,9 +15,10 @@ body{
     border-bottom: solid black 3px;
 }
 
-.background{
+form{
     display: flex;
     justify-content: center;
+    flex-wrap: nowrap;
 }
 .tabla{
     width: 350px;
@@ -44,4 +46,7 @@ img{
     width: 210px;
     float: left;
     margin-left: 20px;
+}
+td{
+    text-align: center;
 }

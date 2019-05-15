@@ -18,13 +18,6 @@
 <body>
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brandn" href="index.html"><img class="logo" src="img/gusPieEshop.png"></a>
-        <div class="collapse navbar-collapse " id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link admin" href="admin.html">Admin<span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-        </div>
     </nav>
     <div class="cuerpo">
         <div class="tabla">
@@ -65,6 +58,7 @@
             var total = 0;
             var totalProducto = [];
             console.log(myCarrito);
+            
             //getJeson
             var url = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
             $.getJSON(url, function (response) {
@@ -83,12 +77,14 @@
                         for (i in response) {
 
                             if (myCarrito[j] == response[i].id_producto) {
+                                cont.push(1);
+                                console.log(cont[j]);
                                 total = total + response[i].precio;
                                 totalProducto.push(response[i].precio);
-                                htmlzatia = '<tr>';
+                                htmlzatia = '<tr data-id="' + response[i].id_producto + '">';
                                 htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
                                 htmlzatia += '<td>' + response[i].nombre + '</td>';
-                                htmlzatia += '<td><div class="cantidad"  data-id="' + response[i].id_producto + '">';
+                                htmlzatia += '<td><div class="cantidad">';
                                 htmlzatia += '<div class="num">' + cont[j] + '</div>';
                                 htmlzatia += '<div class="sumar caja">+</div>';
                                 htmlzatia += '<div class="restar disabled caja">-</div>';
@@ -108,7 +104,7 @@
                 $('.sumar').on("click", function () {
                     var suma = [];
                     var num = 0;
-                    var id = $(this).parent().data("id");
+                    var id = $(this).closest("tr").data("id");
                     //console.log(id);
                     for (i in response) {
 
@@ -123,15 +119,16 @@
                     for (i in myCarrito) {
 
                         if (myCarrito[i] == id) {
+                            console.log(cont[i]);
                             cont[i] = cont[i] + 1;
-                            /* console.log(cont[i]);
-                            console.log(response[num].precio);  
+                             console.log(cont[i]);
+                            /*console.log(response[num].precio);  
                             console.log(total);  */
                             suma[id] = (response[num].precio * cont[i]);
                             $(this).parent().parent().siblings('.precio').html(suma[id] + '€');
-                            console.log(suma[id])
+                           // console.log(suma[id])
                             total = total + response[num].precio;
-                            console.log(total);
+                            //console.log(total);
 
                             /*  console.log(cont[i]); */
 
@@ -151,7 +148,7 @@
                 $('.restar').on("click", function () {
                     var resta = [];
                     var num = 0;
-                    var id = $(this).parent().data("id");
+                    var id = $(this).closest("tr").data("id");
                     //console.log(id);
                     for (i in response) {
 
@@ -193,7 +190,26 @@
 
                 //Borrar producto
                 $('.borrar').on("click", function () {
+                    console.log(cont);
+                    var id = $(this).closest("tr").data("id");
+                    for (i in response) {
 
+                        if (response[i].id_producto == id) {
+                            num = i;
+                            /* console.log(num);
+                            console.log(response[num].precio); */
+
+                        }
+                    }
+                    for (i in myCarrito) {
+                        if (myCarrito[i] == id) {
+                            total = total - (response[num].precio * cont[i]);
+
+                        }
+                    }
+                    $(this).closest('.tabla').siblings('.footer').children(".total").html(total + '€');
+
+                    $(this).closest("tr").fadeOut();
                 })
             }
 
