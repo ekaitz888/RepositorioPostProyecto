@@ -25,10 +25,11 @@ public class FacturaModel extends FacturaClass {
 	 * @param apellidos
 	 * @param telefono
 	 * @param direccion
+	 * @param tarjetaCredito
 	 */
 	public FacturaModel(int id_factura, int id_linea, double total, String nombre, String apellidos, int telefono,
-			String direccion) {
-		super(id_factura, id_linea, total, nombre, apellidos, telefono, direccion);
+			String direccion, int tarjetaCredito) {
+		super(id_factura, id_linea, total, nombre, apellidos, telefono, direccion, tarjetaCredito);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -76,11 +77,13 @@ public class FacturaModel extends FacturaClass {
 			myFactura.setApellidos(rs.getString(5));
 			myFactura.setTelefono(Integer.parseInt(rs.getString(6)));
 			myFactura.setDireccion(rs.getString(7));
+			myFactura.setTarjetaCredito(Integer.parseInt(rs.getString(8)));
 
 			this.list.add(myFactura);
 		}
 		this.disconnect();
 	}
+
 	/**
 	 * @Description Se usa para hacer un insert de datos en factura
 	 * @throws SQLException
@@ -90,7 +93,9 @@ public class FacturaModel extends FacturaClass {
 		this.CreateConection();
 
 		Statement st = this.con.createStatement();
-		st.executeUpdate("INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`) VALUES ("+this.getTotal()+",'"+this.getNombre()+"','"+this.getApellidos()+"',"+this.getTelefono()+",'"+this.getDireccion()+"')");
+
+		st.executeUpdate("INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`,`tarjetaCredito`) VALUES ("+this.getTotal()+",'"+this.getNombre()+"','"+this.getApellidos()+"',"+this.getTelefono()+",'"+this.getDireccion()+"',"+this.getTarjetaCredito()+")");
+
 
 		this.disconnect();
 	}
