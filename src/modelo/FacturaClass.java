@@ -8,6 +8,7 @@ protected String Nombre;
 protected String Apellidos;
 protected int Telefono;
 protected String Direccion;
+protected int tarjetaCredito;
 
 
 /**
@@ -25,9 +26,10 @@ public FacturaClass() {
  * @param apellidos
  * @param telefono
  * @param direccion
+ * @param tarjetaCredito
  */
 public FacturaClass(int id_factura, int id_linea, double total, String nombre, String apellidos, int telefono,
-		String direccion) {
+		String direccion, int tarjetaCredito) {
 	super();
 	this.id_factura = id_factura;
 	this.id_linea = id_linea;
@@ -36,11 +38,22 @@ public FacturaClass(int id_factura, int id_linea, double total, String nombre, S
 	Apellidos = apellidos;
 	Telefono = telefono;
 	Direccion = direccion;
+	this.tarjetaCredito = tarjetaCredito;
 }
 
 
-
-
+/**
+ * @return the tarjetaCredito
+ */
+public int getTarjetaCredito() {
+	return tarjetaCredito;
+}
+/**
+ * @param tarjetaCredito the tarjetaCredito to set
+ */
+public void setTarjetaCredito(int tarjetaCredito) {
+	this.tarjetaCredito = tarjetaCredito;
+}
 /**
  * @return the id_factura
  */
