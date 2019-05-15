@@ -1,6 +1,8 @@
 package controlador;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,6 +32,19 @@ public class CInsertForm extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		FacturaModel myFactura = new FacturaModel();
+		
+		try {
+			myFactura.LoadData();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String Nombre = request.getParameter("nombre");
+		String Apellidos = request.getParameter("apellidos");
+		int Telefono = Integer.parseInt(request.getParameter("telefono"));
+		String Direccion = request.getParameter("direccion");
+		
+		
 	}
 
 	/**
