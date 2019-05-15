@@ -126,7 +126,7 @@
 							$('.modal-title').html(nombreProducto);
 							$('.modal-body').html('<img  width="100%" src="' + src + '">');
 							$('.precio').html(precio + "€");
-							$('#comprar').data('idCompra', id);
+							$('#comprar').data('idcompra', id);
 							//
 						});
 					}
@@ -161,31 +161,44 @@
 					$('#comprar').on("click", function () {
 						$(".carrito").fadeIn();
 						var myCarrito = []; //Array bat json objetuak gordetzeko
-						var id = $(this).data("idCompra");
-						console.log(id);
+						var id = $(this).data("idcompra");
+						var num = -1;
+						//	console.log(id);
 
 
 						if (localStorage.getItem("myCarrito") !== null) {
 							//myCarrito = [];
 							var oldCarritoString = localStorage.getItem("myCarrito");
 							myCarrito = JSON.parse(oldCarritoString);
-							var myObjeto = new Object();  // sortzen dut json objetua
-							myObjeto.id = id;
-							myCarrito.push(myObjeto); // json objetua arrayra eraman
-						} else {
+
+							for (i in myCarrito) {
+								if (myCarrito[i].id == id) {
+									num = i;
+									console.log(num);
+								}
+							}
+
+							if (num == -1) {  // ez da aurkitu produktua arrayan
+								var myObjeto = new Object();  // sortzen dut json objetua
+								myObjeto.id = id;
+								myObjeto.cant = 1;
+								myCarrito.push(myObjeto); // json objetua arrayra eraman
+							} else {
+								//alert("Este producto ya fue seleccionado");
+								
+								//myCarrito[num].id = id;
+								myCarrito[num].cant = myCarrito[num].cant + 1;
+								//myCarrito.push(myObjeto); // json objetua arrayra eraman
+							}
+							
+						} else {  // karritorik existitzen ez bada localstoragen
 
 							var myObjeto = new Object();  // sortzen dut json objetua
 							myObjeto.id = id;
+							myObjeto.cant = 1;
 							myCarrito.push(myObjeto); // json objetua arrayra eraman
-
-
-
-
 						}
 						//myCarrito = [];
-
-
-
 						console.log(myCarrito);
 						var myString = JSON.stringify(myCarrito); // json objetuen array-a string bihurtu
 						localStorage.setItem("myCarrito", myString); // array-a local storgra eraman
