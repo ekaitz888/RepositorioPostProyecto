@@ -75,25 +75,30 @@
             function printProducts(response) {
                 var htmlzatia = '';
                 for (j in myCarrito) {
-                    cont.push(1);
-                    for (i in response) {
+                    if (myCarrito == "") {
+                        htmlzatia = "<p>Lo sentimos, pero su carrito está vacío</p>";
+                        $(".footer").html(htmlzatia);
+                    } else {
+                        cont.push(1);
+                        for (i in response) {
 
-                        if (myCarrito[j] == response[i].id_producto) {
-                            total = total + response[i].precio;
-                            totalProducto.push(response[i].precio);
-                            htmlzatia = '<tr>';
-                            htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
-                            htmlzatia += '<td>' + response[i].nombre + '</td>';
-                            htmlzatia += '<td><div class="cantidad"  data-id="' + response[i].id_producto + '">';
-                            htmlzatia += '<div class="num">' + cont[j] + '</div>';
-                            htmlzatia += '<div class="sumar caja">+</div>';
-                            htmlzatia += '<div class="restar disabled caja">-</div>';
-                            htmlzatia += '</div>';
-                            htmlzatia += '</td>';
-                            htmlzatia += '<td class="precio">' + response[i].precio + '€</td>'
-                            htmlzatia += '<td><img src="img/x-mark.svg" class="borrar">';
-                            htmlzatia += '</tr>';
-                            $('tbody').append(htmlzatia);
+                            if (myCarrito[j] == response[i].id_producto) {
+                                total = total + response[i].precio;
+                                totalProducto.push(response[i].precio);
+                                htmlzatia = '<tr>';
+                                htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
+                                htmlzatia += '<td>' + response[i].nombre + '</td>';
+                                htmlzatia += '<td><div class="cantidad"  data-id="' + response[i].id_producto + '">';
+                                htmlzatia += '<div class="num">' + cont[j] + '</div>';
+                                htmlzatia += '<div class="sumar caja">+</div>';
+                                htmlzatia += '<div class="restar disabled caja">-</div>';
+                                htmlzatia += '</div>';
+                                htmlzatia += '</td>';
+                                htmlzatia += '<td class="precio">' + response[i].precio + '€</td>'
+                                htmlzatia += '<td><img src="img/x-mark.svg" class="borrar">';
+                                htmlzatia += '</tr>';
+                                $('tbody').append(htmlzatia);
+                            }
                         }
                     }
                 }
@@ -101,62 +106,87 @@
                 $('.total').html('<b>' + total + '€</b>');
                 //Sumar Cantidad
                 $('.sumar').on("click", function () {
-                    var suma=[];
+                    var suma = [];
                     var num = 0;
                     var id = $(this).parent().data("id");
                     //console.log(id);
                     for (i in response) {
-                        
+
                         if (response[i].id_producto == id) {
-                            num=i;
+                            num = i;
                             /* console.log(num);
                             console.log(response[num].precio); */
 
                         }
                     }
-                    
+
                     for (i in myCarrito) {
-                        
+
                         if (myCarrito[i] == id) {
                             cont[i] = cont[i] + 1;
                             /* console.log(cont[i]);
                             console.log(response[num].precio);  
-                            console.log(total);  */                      
-                            suma[id]=(response[num].precio*cont[i]);
-                            $(this).parent().parent().siblings('.precio').html(suma[id]+'€');
+                            console.log(total);  */
+                            suma[id] = (response[num].precio * cont[i]);
+                            $(this).parent().parent().siblings('.precio').html(suma[id] + '€');
                             console.log(suma[id])
-                            total=total+response[num].precio;
+                            total = total + response[num].precio;
                             console.log(total);
-                            
-                           /*  console.log(cont[i]); */
-                            
+
+                            /*  console.log(cont[i]); */
+
                             $(this).parent('.cantidad').children('.num').html(cont[i]);
-                            
+
                         }
-                        
+
                     }
-                    $(this).closest('.tabla').siblings('.footer').children(".total").html(total+'€');
-                    
-                    
+                    $(this).closest('.tabla').siblings('.footer').children(".total").html(total + '€');
+
+
 
 
                 })
 
                 //restar cantidad
                 $('.restar').on("click", function () {
+                    var resta = [];
+                    var num = 0;
                     var id = $(this).parent().data("id");
-                    console.log(id);
-                    for (i in myCarrito) {
-                        if (myCarrito[i] == id) {
-                            cont[i] = cont[i] - 1;
-                            total
-                            if (cont[i] == 1) {
-                                $(this).addClass('disabled');
-                            }
-                            console.log(cont[i]);
+                    //console.log(id);
+                    for (i in response) {
+
+                        if (response[i].id_producto == id) {
+                            num = i;
+                            /* console.log(num);
+                            console.log(response[num].precio); */
+
                         }
                     }
-                    $(this).parent('.cantidad').children(".num").html(cont[i]);
+
+                    for (i in myCarrito) {
+
+                        if (myCarrito[i] == id) {
+                            if (cont[i] == 1) {
+
+                            } else {
+                                cont[i] = cont[i] - 1;
+                                /* console.log(cont[i]);
+                                console.log(response[num].precio);  
+                                console.log(total);  */
+                                resta[id] = (response[num].precio * cont[i]);
+                                $(this).parent().parent().siblings('.precio').html(resta[id] + '€');
+                                console.log(resta[id])
+                                total = total - response[num].precio;
+                                console.log(total);
+
+                                /*  console.log(cont[i]); */
+
+                                $(this).parent('.cantidad').children('.num').html(cont[i]);
+                            }
+                        }
+
+                    }
+                    $(this).closest('.tabla').siblings('.footer').children(".total").html(total + '€');
 
 
                 })
