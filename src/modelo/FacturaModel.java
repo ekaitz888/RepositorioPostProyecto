@@ -90,7 +90,7 @@ public class FacturaModel extends FacturaClass {
 		this.CreateConection();
 
 		Statement st = this.con.createStatement();
-		st.executeUpdate("INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`) VALUES ("+this.getTotal()+",'"+this.getNombre()+"','"+this.getApellidos()+"',"+this.getTelefono()+",'"+this.getDireccion()+"')");
+		st.executeUpdate("INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`,`tarjetaCredito`) VALUES ("+this.getTotal()+",'"+this.getNombre()+"','"+this.getApellidos()+"',"+this.getTelefono()+",'"+this.getDireccion()+"')");
 
 		this.disconnect();
 	}
