@@ -53,11 +53,12 @@
     <script>
         $(document).ready(function () {
             //variables
-            var myCarrito = localStorage.getItem("myCarrito");
+            var myCarrito = JSON.parse(localStorage.getItem("myCarrito"));
             var cont = [];
             var total = 0;
             var totalProducto = [];
             console.log(myCarrito);
+            
             
             //getJeson
             var url = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
@@ -68,15 +69,13 @@
             //Imprimir productos
             function printProducts(response) {
                 var htmlzatia = '';
+
                 for (j in myCarrito) {
-                    if (myCarrito == "") {
-                        htmlzatia = "<p>Lo sentimos, pero su carrito está vacío</p>";
-                        $(".footer").html(htmlzatia);
-                    } else {
+                    
                         cont.push(1);
                         for (i in response) {
 
-                            if (myCarrito[j] == response[i].id_producto) {
+                            if (myCarrito[j].id == response[i].id_producto) {
                                 cont.push(1);
                                 console.log(cont[j]);
                                 total = total + response[i].precio;
@@ -94,7 +93,7 @@
                                 htmlzatia += '<td><img src="img/x-mark.svg" class="borrar">';
                                 htmlzatia += '</tr>';
                                 $('tbody').append(htmlzatia);
-                            }
+                            
                         }
                     }
                 }
@@ -118,7 +117,7 @@
 
                     for (i in myCarrito) {
 
-                        if (myCarrito[i] == id) {
+                        if (myCarrito[i].id == id) {
                             console.log(cont[i]);
                             cont[i] = cont[i] + 1;
                              console.log(cont[i]);
@@ -162,7 +161,8 @@
 
                     for (i in myCarrito) {
 
-                        if (myCarrito[i] == id) {
+                        if (myCarrito[i].id == id) {
+                            
                             if (cont[i] == 1) {
 
                             } else {
@@ -202,7 +202,7 @@
                         }
                     }
                     for (i in myCarrito) {
-                        if (myCarrito[i] == id) {
+                        if (myCarrito[i].id == id) {
                             total = total - (response[num].precio * cont[i]);
 
                         }
