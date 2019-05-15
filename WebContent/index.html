@@ -33,7 +33,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="precio"></div>
-					<button id="comprar" type="button" class="btn btn-primary">Purchase</button>
+					<button id="comprar" type="button" class="btn btn-primary">Seleccionar producto</button>
 				</div>
 			</div>
 		</div>
@@ -162,8 +162,8 @@
 						$(".carrito").fadeIn();
 						var myCarrito = []; //Array bat json objetuak gordetzeko
 						var id = $(this).data("idCompra");
-						var list = [];
 						console.log(id);
+
 
 						if (localStorage.getItem("myCarrito") !== null) {
 							//myCarrito = [];
@@ -172,13 +172,17 @@
 							var myObjeto = new Object();  // sortzen dut json objetua
 							myObjeto.id = id;
 							myCarrito.push(myObjeto); // json objetua arrayra eraman
-							list.push(id);
 						} else {
-							var myObjeto = new Object();  // sortzen dut json objetua
-							myObjeto.id = id;
-							myCarrito.push(myObjeto); // json objetua arrayra eraman
-							list.push();
-							console.log(list);
+							for (i in myCarrito) {
+								if (id == myCarrito[i]) {
+									alert("este producto ya fue seleccionado");
+								} else {
+									var myObjeto = new Object();  // sortzen dut json objetua
+									myObjeto.id = id;
+									myCarrito.push(myObjeto); // json objetua arrayra eraman
+								}
+							}
+
 
 						}
 						//myCarrito = [];
