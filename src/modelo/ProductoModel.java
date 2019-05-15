@@ -56,7 +56,7 @@ public class ProductoModel extends ProductoClass {
 		this.CreateConection();
 
 		Statement st = this.con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM `producto`");
+		ResultSet rs = st.executeQuery("CALL LoadDataProductos");
 
 		while (rs.next()) { // reads the table line by line
 

@@ -65,7 +65,7 @@ public class FacturaModel extends FacturaClass {
 		this.CreateConection();
 
 		Statement st = this.con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM `factura`");
+		ResultSet rs = st.executeQuery("CALL LoadDataFacturas");
 
 		while (rs.next()) { // reads the table line by line
 
