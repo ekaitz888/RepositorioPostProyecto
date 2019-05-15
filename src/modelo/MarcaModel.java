@@ -54,7 +54,7 @@ public class MarcaModel extends MarcaClass {
 		this.CreateConection();
 
 		Statement st = this.con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM `marca`");
+		ResultSet rs = st.executeQuery("CALL LoadDataMarcas");
 
 		while (rs.next()) { // reads the table line by line
 
