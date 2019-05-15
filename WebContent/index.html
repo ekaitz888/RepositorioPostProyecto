@@ -174,21 +174,16 @@
 							myCarrito.push(myObjeto); // json objetua arrayra eraman
 							list.push(id);
 						} else {
-							for (i in list) {
-								if (list[i] == id) {
-									alert("este producto ya fue seleccionado");
-								} else {
-									var myObjeto = new Object();  // sortzen dut json objetua
-									myObjeto.id = id;
-									myCarrito.push(myObjeto); // json objetua arrayra eraman
-									list.push();
-									console.log(list);
-								}
-
-							}
-							//myCarrito = [];
+							var myObjeto = new Object();  // sortzen dut json objetua
+							myObjeto.id = id;
+							myCarrito.push(myObjeto); // json objetua arrayra eraman
+							list.push();
+							console.log(list);
 
 						}
+						//myCarrito = [];
+
+
 
 						console.log(myCarrito);
 						var myString = JSON.stringify(myCarrito); // json objetuen array-a string bihurtu
