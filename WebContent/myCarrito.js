@@ -7,6 +7,7 @@ $('.compra').on("click", function(){
         url:"CInsertForm",
         datatype: "json",
         success: function(result){
+            alert("Correcto");
         },error: function(xhr){
             alert ("Ha ocurrido un error"+xhr.status+ " "+xhr.estatusText);
         }

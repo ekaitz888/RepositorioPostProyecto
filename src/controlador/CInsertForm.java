@@ -34,7 +34,16 @@ public class CInsertForm extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		FacturaModel myFactura = new FacturaModel();
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+FacturaModel myFactura = new FacturaModel();
 		
 		try {
 			myFactura.LoadData();
@@ -58,15 +67,6 @@ public class CInsertForm extends HttpServlet {
 			
 			System.out.println("id:"+id+"cant"+cant);
 		}
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
