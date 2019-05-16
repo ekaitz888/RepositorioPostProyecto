@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-05-2019 a las 10:45:52
+-- Tiempo de generación: 16-05-2019 a las 10:59:56
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.1.21
 
@@ -21,6 +21,36 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyecto_final`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertDatos_Factura` (IN `total` INT, IN `nombre` VARCHAR(32), IN `apellidos` VARCHAR(32), IN `telefono` INT, IN `direccion` VARCHAR(32), IN `tarjetaCredito` INT)  NO SQL
+INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`) VALUES (total, nombre, apellidos, telefono, direccion, tarjetaCredito)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LoadData_Facturas` ()  NO SQL
+SELECT * FROM `factura`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LoadData_Lineas` ()  NO SQL
+SELECT * FROM `linea`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LoadData_Marcas` ()  NO SQL
+SELECT * FROM `marca`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LoadData_Productos` ()  NO SQL
+SELECT * FROM `producto`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SelectFacture_by_Id` (IN `id` INT)  NO SQL
+SELECT * FROM `factura` WHERE factura.id_factura = id$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SelectProducto_by_Id` (IN `id` INT)  NO SQL
+SELECT * FROM `producto` WHERE producto.id_producto = id$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SelectProducts_by_Marca` (IN `id` INT)  NO SQL
+SELECT * FROM `producto` WHERE producto.id_marca = id$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
