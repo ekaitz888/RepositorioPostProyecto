@@ -205,7 +205,7 @@
                     for (i in myCarrito) {
                         if (myCarrito[i].id == id) {
                             total = total - (response[num].precio * myCarrito[i].cant);
-                            myCarrito.splice(myCarrito[i].id, );
+                            myCarrito.splice(i, 1);
                             myString = JSON.stringify(myCarrito);
                             localStorage.setItem("myCarrito", myString);
                         }
@@ -216,22 +216,6 @@
 
                 })
             }
-            $('.comprar').on("click", function () {
-                for (i in myCarrito) {
-                    for (j in response) {
-                        if (myCarrito[i].id == response[j].id_producto) {
-                            var myObjeto = new Object();  // sortzen dut json objetua
-                            myObjeto.id = myCarrito[i].id;
-                            myObjeto.cant = myCarrito[i].cant;
-                            myObjeto.precio = response[j].precio * myCarrito[i].cant;
-                            list.push(myObjeto); // json objetua arrayra eraman
-                        }
-                    }
-                }
-                var myString = JSON.stringify(list); // json objetuen array-a string bihurtu
-                localStorage.setItem("list", myString);
-            })
-
         })
     </script>
 </body>
