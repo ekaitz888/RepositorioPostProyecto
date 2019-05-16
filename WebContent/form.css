@@ -13,6 +13,7 @@ body{
 .titulo{
     text-align: center;
     border-bottom: solid black 3px;
+    margin-bottom: 25px;
 }
 
 form{
@@ -21,13 +22,13 @@ form{
     flex-wrap: nowrap;
 }
 .tabla{
-    width: 350px;
+    width: 675px;
     background-color: white;
     display: relative;
-    max-height: 400px;
+    max-height: 500px;
     overflow:scroll;
     margin-left: 100px;
-    margin-top: 100px;
+    margin-top: 150px;
 }
 .card{
     width: 100%;
@@ -47,6 +48,14 @@ img{
     float: left;
     margin-left: 20px;
 }
-td{
+
+.compra{
+    background-color: palevioletred;
+    padding: 20px;
+    border-radius: 15px;
+    border: solid 1px palevioletred;
+    margin-top: 20px;
+}
+.footer{
     text-align: center;
 }
