@@ -55,7 +55,7 @@ public class LineaModel extends LineaClass {
 		this.CreateConection();
 
 		Statement st = this.con.createStatement();
-		ResultSet rs = st.executeQuery("CALL LoadDataLineas");
+		ResultSet rs = st.executeQuery("CALL LoadData_Lineas");
 
 		while (rs.next()) { // reads the table line by line
 
