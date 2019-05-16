@@ -127,7 +127,6 @@
 							$('.modal-body').html('<img  width="100%" src="' + src + '">');
 							$('.precio').html(precio + "€");
 							$('#comprar').data('idcompra', id);
-							$('#comprar').data('precio',precio);
 							//
 						});
 					}
@@ -163,9 +162,9 @@
 						$(".carrito").fadeIn();
 						var myCarrito = []; //Array bat json objetuak gordetzeko
 						var id = $(this).data("idcompra");
-						var precio=$(this).data('precio');
+						
 						var num = -1;
-						var j=0;
+						
 						//	console.log(id);
 
 
@@ -180,24 +179,20 @@
 									console.log(num);
 								}
 							}
-							for (i in response){
-								if (response[i].id_producto==id){
-									j=i;
-								}
-							}
+							
 
 							if (num == -1) {  // ez da aurkitu produktua arrayan
 								var myObjeto = new Object();  // sortzen dut json objetua
 								myObjeto.id = id;
 								myObjeto.cant = 1
-								myObjeto.precio=precio;
+								
 								myCarrito.push(myObjeto); // json objetua arrayra eraman
 							} else {
 								//alert("Este producto ya fue seleccionado");
 								
 								//myCarrito[num].id = id;
 								myCarrito[num].cant = myCarrito[num].cant + 1;
-								myCarrito[num].precio=myCarrito[num].cant*response[j].precio;
+								
 								//myCarrito.push(myObjeto); // json objetua arrayra eraman
 							}
 							
@@ -206,7 +201,7 @@
 							var myObjeto = new Object();  // sortzen dut json objetua
 							myObjeto.id = id;
 							myObjeto.cant = 1;
-							myObjeto.precio=precio;
+							
 							myCarrito.push(myObjeto); // json objetua arrayra eraman
 						}
 						//myCarrito = [];
