@@ -137,8 +137,8 @@
 						for (i in response) {
 							htmlzatia = '<div class="row">';
 							htmlzatia += '<div class="col-3">';
-							htmlzatia += '<div  data-id="' + response[i].id_marca + '" class="marcas nav flex-column nav-pills"  role="tablist" aria-orientation="vertical">';
-							htmlzatia += '<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" data-nombre="' + response[i].nombre + '" aria-selected="true">' + response[i].nombre + '</a>';
+							htmlzatia += '<div  data-id="' + response[i].id_marca + '" class=" marcas nav flex-column nav-pills"  role="tablist" aria-orientation="vertical">';
+							htmlzatia +=  '<div class="">'+response[i].nombre+'</div>' ;
 							htmlzatia += '</div>';
 							htmlzatia += '</div>';
 							$('.lateral').children().append(htmlzatia);
