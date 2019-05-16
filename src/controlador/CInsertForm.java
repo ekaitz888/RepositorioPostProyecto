@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+
 import modelo.FacturaModel;
 
 /**
@@ -43,6 +45,18 @@ public class CInsertForm extends HttpServlet {
 		String Apellidos = request.getParameter("apellidos");
 		int Telefono = Integer.parseInt(request.getParameter("telefono"));
 		String Direccion = request.getParameter("direccion");
+		String myCarrito = request.getParameter("myCarrito");
+		
+		JSONArray arrJson = new JSONArray(myCarrito);
+		
+		for (int i = 0; i < arrJson.length(); i++) {
+			
+			int id = Integer.parseInt(arrJson.getJSONObject(i).getString("id")) ;
+			int cant = Integer.parseInt(arrJson.getJSONObject(i).getString("cant"));
+			
+			
+			System.out.println("id:"+id+"cant"+cant);
+		}
 		
 		
 	}
