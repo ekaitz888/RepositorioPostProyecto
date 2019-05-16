@@ -2,6 +2,7 @@ package controlador;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +44,6 @@ public class CInsertForm extends HttpServlet {
 		String Apellidos = request.getParameter("apellidos");
 		int Telefono = Integer.parseInt(request.getParameter("telefono"));
 		String Direccion = request.getParameter("direccion");
-		
 		
 	}
 

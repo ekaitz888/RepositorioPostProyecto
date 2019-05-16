@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import modelo.ProductoModel;
 
 /**
@@ -32,11 +34,13 @@ public class CCarrito extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ProductoModel list = new ProductoModel();
-		ArrayList<ProductoModel> myCarrito = new ArrayList<ProductoModel>();
-		String idProducto = request.getParameter("myCarrito");
+		ProductoModel data = new ProductoModel();
+		ArrayList<ProductoModel> list = new ArrayList<ProductoModel>();
+		String myCarrito = request.getParameter("myCarrito");
+		JSONObject json = new JSONObject();
+		//json.parse())
 		try {
-			list.LoadData();
+			data.LoadData();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
