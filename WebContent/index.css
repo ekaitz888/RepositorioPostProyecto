@@ -79,9 +79,9 @@ button{
     text-align: inherit;
 }
 
-.imagen{
+.card-img-top{
 
-  width: 100%;
+    flex-grow: 3;
     margin-top: 10px;
     background-size:cover;
 }
