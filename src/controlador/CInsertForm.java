@@ -15,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import modelo.FacturaModel;
+import modelo.LineaModel;
+import modelo.ProductoModel;
 
 /**
  * Servlet implementation class CInsertForm
@@ -79,7 +81,15 @@ public class CInsertForm extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String stMyCarrito = request.getParameter("myCarrito");
+		LineaModel list = new LineaModel();
+		ProductoModel myProduct = new ProductoModel();
 		
+		try {
+			myProduct.LoadData();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		PrintWriter out = response.getWriter();
 		response.setHeader("Access-Control-Allow-Origin", "*"); // json deia denean ez da behar
@@ -93,13 +103,24 @@ public class CInsertForm extends HttpServlet {
 		for (int i=0; i<JSONArray.length();i++) {
 			System.out.println(JSONArray.getJSONObject(i));
 			JSONObject explrObject = JSONArray.getJSONObject(i);
-			System.out.println(explrObject.get("id") +" "+ explrObject.get("cant"));
+			System.out.println(explrObject.getInt("id") +" "+ explrObject.get("cant"));
 			
 			
 			
 		}
 		out.print(JSONArray);
 		out.flush();
+		for (int j=0; j<JSONArray.length();j++) {
+			for (int i=0; i<myProduct.getList().size();i++) {				
+				if(JSONArray.getJSONObject(j).getInt("id")==myProduct.getList().get(i).getId_producto()) {
+					list.setId_producto(myProduct.getList().get(i).getId_producto());
+					list.setCantidad(JSONArray.getJSONObject(j).getInt("cant"));
+					list.setPrecio(myProduct.getList().get(i).getPrecio()*JSONArray.getJSONObject(j).getInt("cant"));
+					System.out.println(list.getId_producto()+" "+ list.getCantidad()+" "+ list.getPrecio());
+				}
+			}
+		}
+		
 		
 	}
 
