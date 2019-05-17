@@ -75,8 +75,15 @@ button{
 }
 
 .titulo{
+    align-items: flex-end;
+    
+
+}
+.card-body{
+    display: flex;
     flex-grow: 1;
-    text-align: inherit;
+    /* justify-content: end; */
+    align-items: flex-end;
 }
 
 .card-img-top{
