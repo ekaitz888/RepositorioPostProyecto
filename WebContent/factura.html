@@ -22,38 +22,26 @@
 
 
     <div class="background">
-        
-            <div class="form">
-               <!--  <div class="titulo">
-                    <h1>Datos del usuario</h1>
-                </div>
-                Nombre
-                <input type="text" name="nombre">
-                Apellidos
-                <input  type="text" name="Apellidos">
-                Teléfono
-                <input  type="text" name="teléfono">
-                dirección
-                <input  type="text" name="48036">
-                <button type="button" class="compra button btn-primary">Meter los datos</button> -->
+
+        <div class="form">
         </div>
     </div>
 
-            <div class="tabla">
-                <table>
-                    <thead>
-                        <div class="titulo">
-                            <h5>Productos Comprados</h5>
-                        </div>
-                        <tr>
-                            <td>Imagen</td>
-                            <td>Nombre</td>
-                            <td>Cantidad</td>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
+    <div class="tabla">
+        <table>
+            <thead>
+                <div class="titulo">
+                    <h5>Productos Comprados</h5>
+                </div>
+                <tr>
+                    <td>Imagen</td>
+                    <td>Nombre</td>
+                    <td>Cantidad</td>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
     </div>
 
 
@@ -68,27 +56,48 @@
         $(document).ready(function () {
             var myCarrito = JSON.parse(localStorage.getItem("myCarrito"));
             console.log(myCarrito);
-            var url = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
+            var urlFactura = 'http://10.22.72.108:8080/proyecto_final/CJsonFactura';
+            var urlProducto = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
 
-            $.getJSON(url, function (response) {
+
+            $.getJSON(urlProducto, function (response) {
                 console.log(response);
                 printProducts(response);
+            });
+
+            $.getJSON(urlFactura, function (response) {
+                console.log(response);
+                printFactura(response);
             });
 
             function printProducts(response) {
                 var htmlzatia = '';
                 for (j in myCarrito) {
-                    
+
                     for (i in response) {
                         if (myCarrito[j].id == response[i].id_producto) {
                             htmlzatia = '<tr>';
                             htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
                             htmlzatia += '<td>' + response[i].nombre + '</td>';
-                            htmlzatia += '<td><div class="num">' + myCarrito[j].cant+ '<div></td>';
+                            htmlzatia += '<td><div class="num">' + myCarrito[j].cant + '<div></td>';
                             htmlzatia += '</tr>';
                             $('tbody').append(htmlzatia);
                         }
                     }
+                }
+            }
+
+            function printFactura(response) {
+                var htmlzatia = '';
+                for (i in Response) {
+
+                    htmlzatia = '<div class="">';
+                    htmlzatia += '<div>' + response[i].Nombre + '</div>';
+                    htmlzatia += '<div>' + response[i].Apellidos + '</div>';
+                    htmlzatia += '<div>' + response[i].Telefono + '</div>';
+                    htmlzatia += '<div>' + response[i].Direccion + '</div>';
+                    htmlzatia += '</div>';
+                    $()
                 }
             }
         });

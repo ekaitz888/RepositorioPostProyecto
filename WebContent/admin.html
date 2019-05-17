@@ -8,28 +8,53 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Document</title>
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brandn" href="index.html"><img class="logo" src="img/gusPieEshop.png"></a>
+    </nav>
+    <div class="background">
+        <div class="container">
+            <div class="datos"></div>
+            <div class="productos"></div>
 
-    <div class="container"></div>
+        </div>
+    </div>
 
     <script>
-        $(document)
-            .ready(
-                function () {
-                    var url = 'http://10.22.72.108:8080/proyecto_final/CJsonFactura';
+        $(document).ready(function () {
+            var myCarrito = JSON.parse(localStorage.getItem("myCarrito"));
+            console.log(myCarrito);
+            var urlFactura = 'http://10.22.72.108:8080/proyecto_final/CJsonFactura';
+            var urlProducto = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
 
-                    $.getJSON(url, function (response) {
-                        console.log(response);
-                        printFactures(response);
-                    });
+            $.getJSON(urlFactura, function (response) {
+                console.log(response);
+                printFactures(response);
+            });
 
-                    function printFactures(response) {
+            $.getJSON(urlProducto, function (response) {
+                console.log(response);
 
+            });
 
-                    }
-                });
+            function printFactures(response) {
+                var htmlzatia = '';
+                for (i in Response) {
+                    htmlzatia = '<div class="datosPersonales">';
+                    htmlzatia += '<div>' + response[i].Nombre + '</div>';
+                    htmlzatia += '<div>' + response[i].Apellidos + '</div>';
+                    htmlzatia += '<div>' + response[i].Telefono + '</div>';
+                    htmlzatia += '<div>' + response[i].Direccion + '</div>';
+                    htmlzatia += '</div>';
+                    $('.datos').append(htmlzatia);
+                }
+
+            }
+        });
 
 
     </script>

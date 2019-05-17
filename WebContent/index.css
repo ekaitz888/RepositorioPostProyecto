@@ -91,4 +91,5 @@ button{
     flex-grow: 3;
     margin-top: 10px;
     background-size:cover;
+    height: 350px;
 }
