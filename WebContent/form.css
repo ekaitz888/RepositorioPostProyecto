@@ -59,3 +59,9 @@ img{
 .footer{
     text-align: center;
 }
+.total{
+    float: right;
+    text-align: end;
+    font-size: 25px;
+    
+}
