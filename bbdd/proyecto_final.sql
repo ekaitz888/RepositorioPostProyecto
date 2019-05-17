@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2019 a las 10:59:56
+-- Tiempo de generación: 17-05-2019 a las 11:03:13
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.1.21
 
@@ -26,6 +26,9 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Delete_Factura` (IN `id` INT)  NO SQL
+DELETE FROM `factura` WHERE factura.id_factura = id$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertDatos_Factura` (IN `total` INT, IN `nombre` VARCHAR(32), IN `apellidos` VARCHAR(32), IN `telefono` INT, IN `direccion` VARCHAR(32), IN `tarjetaCredito` INT)  NO SQL
 INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`) VALUES (total, nombre, apellidos, telefono, direccion, tarjetaCredito)$$
 
