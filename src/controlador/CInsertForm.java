@@ -88,15 +88,15 @@ public class CInsertForm extends HttpServlet {
 		
 		System.out.println(stMyCarrito);
 		JSONArray JSONArray = new JSONArray(stMyCarrito);
-		JSONObject JSONObject= new JSONObject(stMyCarrito);
-		JSONArray jsonArray = JSONObject.getJSONArray("myCarrito");
-		for (int i=0; i<jsonArray.length();i++) {
+		
+		
+		for (int i=0; i<JSONArray.length();i++) {
 			System.out.println(JSONArray.getJSONObject(i));
 			JSONObject explrObject = JSONArray.getJSONObject(i);
+			System.out.println(explrObject.get("id") +" "+ explrObject.get("cant"));
 			
-			//JSONObject jsonObj = JSONArray.getJSONObject(i);
-
-            //System.out.println(jsonObject.get);*/
+			
+			
 		}
 		out.print(JSONArray);
 		out.flush();

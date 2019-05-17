@@ -8,6 +8,7 @@ $('.compra').on("click", function(){
         datatype: "json",
         success: function(response){
             alert(response);
+            console.log(response);
         },error: function(xhr){
             alert ("Ha ocurrido un error"+xhr.status+ " "+xhr.estatusText);
         }

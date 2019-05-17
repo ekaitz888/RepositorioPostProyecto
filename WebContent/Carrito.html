@@ -180,7 +180,7 @@
                         }
 
                     }
-                    $(this).closest('.tabla').siblings('.footer').children(".total").html(total + '€');
+                    $(this).closest('.tabla').siblings('.footer').children(".total").html('<b>'+total + '€</b>');
                     myString = JSON.stringify(myCarrito);
                     localStorage.setItem("myCarrito", myString);
 
