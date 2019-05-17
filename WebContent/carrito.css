@@ -62,3 +62,10 @@ body{
 .total{
     font-size: 50px;
 }
+.comprar{
+    background-color: palevioletred;
+    padding: 20px;
+    border-radius: 15px;
+    border: solid 1px palevioletred;
+    margin-top: 20px;
+}

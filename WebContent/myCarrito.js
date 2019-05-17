@@ -4,7 +4,7 @@ $('.compra').on("click", function(){
     $.ajax({
         type:"post",
         data:{"myCarrito": myCarrito},
-        url:"CInsertForm",
+        url:"http://localhost:8080/proyecto_final/CInsertForm",
         datatype: "json",
         success: function(result){
             alert("Correcto");
