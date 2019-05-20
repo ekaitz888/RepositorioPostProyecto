@@ -5,9 +5,9 @@ public class FacturaClass extends Connect {
 	protected double total;
 	protected String Nombre;
 	protected String Apellidos;
-	protected int Telefono;
+	protected String Telefono;
 	protected String Direccion;
-	protected int tarjetaCredito;
+	protected String tarjetaCredito;
 
 	/**
 	 * @Description Es el constructor de la clase superior
@@ -26,8 +26,8 @@ public class FacturaClass extends Connect {
 	 * @param direccion
 	 * @param tarjetaCredito
 	 */
-	public FacturaClass(int id_factura, double total, String nombre, String apellidos, int telefono, String direccion,
-			int tarjetaCredito) {
+	public FacturaClass(int id_factura, double total, String nombre, String apellidos, String telefono, String direccion,
+			String tarjetaCredito) {
 		super();
 		this.id_factura = id_factura;
 		this.total = total;
@@ -41,7 +41,7 @@ public class FacturaClass extends Connect {
 	/**
 	 * @return the tarjetaCredito
 	 */
-	public int getTarjetaCredito() {
+	public String getTarjetaCredito() {
 		return tarjetaCredito;
 	}
 
@@ -49,7 +49,7 @@ public class FacturaClass extends Connect {
 	 * @param tarjetaCredito
 	 *            the tarjetaCredito to set
 	 */
-	public void setTarjetaCredito(int tarjetaCredito) {
+	public void setTarjetaCredito(String tarjetaCredito) {
 		this.tarjetaCredito = tarjetaCredito;
 	}
 
@@ -116,23 +116,23 @@ public class FacturaClass extends Connect {
 	/**
 	 * @return the telefono
 	 */
-	public int getTelefono() {
-		return Telefono;
-	}
+	
 
-	/**
-	 * @param telefono
-	 *            the telefono to set
-	 */
-	public void setTelefono(int telefono) {
-		Telefono = telefono;
-	}
+	
 
 	/**
 	 * @return the direccion
 	 */
 	public String getDireccion() {
 		return Direccion;
+	}
+
+	public String getTelefono() {
+		return Telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		Telefono = telefono;
 	}
 
 	/**

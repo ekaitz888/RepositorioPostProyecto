@@ -16,11 +16,7 @@ body{
     margin-bottom: 25px;
 }
 
-form{
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap;
-}
+
 .tabla{
     width: 675px;
     background-color: white;
@@ -64,4 +60,9 @@ img{
     text-align: end;
     font-size: 25px;
     
+}
+.background{
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
 }

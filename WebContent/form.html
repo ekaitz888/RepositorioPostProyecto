@@ -22,45 +22,45 @@
 
 
     <div class="background">
-        <form method="POST" action="CInsertForm">
-            <div class="form">
-                <div class="titulo">
-                    <h1>Datos del usuario</h1>
-                </div>
-                Nombre
-                <input type="text" name="nombre">
-                Apellidos
-                <input  type="text" name="apellidos">
-                Teléfono
-                <input  type="text" name="teléfono">
-                Dirección
-                <input  type="text" name="direccion">
-                Tarjeta De Credito/Debito
-                <input  type="text" name="tarjetaCredito">
-                <div class="footer">
+
+        <div class="form">
+            <div class="titulo">
+                <h1>Datos del usuario</h1>
+            </div>
+            Nombre
+            <input type="text" id="nombre">
+            Apellidos
+            <input type="text" id="apellidos">
+            Teléfono
+            <input type="text" id="telefono">
+            Dirección
+            <input type="text" id="direccion">
+            Tarjeta De Credito/Debito
+            <input type="text" id="tarjetaCredito">
+            <div class="footer">
                 <button type="button" class="compra">Meter los datos</button>
-                </div>
             </div>
+        </div>
 
-            <div class="tabla">
-                <table>
-                    <thead>
-                        <div class="titulo">
-                            <h5>Lista</h5>
-                        </div>
-                        <tr>
-                            <td>imagen</td>
-                            <td>nombre</td>
-                            <td>cantidad</td>
-                            <td>precio</td>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <div class="total"></div>
-            </div>
+        <div class="tabla">
+            <table>
+                <thead>
+                    <div class="titulo">
+                        <h5>Lista</h5>
+                    </div>
+                    <tr>
+                        <td>imagen</td>
+                        <td>nombre</td>
+                        <td>cantidad</td>
+                        <td>precio</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="total"></div>
+        </div>
 
-        </form>
+
     </div>
 
 
@@ -71,8 +71,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-        <script src="myCarrito.js"></script>
-    <script>        
+
+    <script>
         $(document).ready(function () {
             var myCarrito = JSON.parse(localStorage.getItem("myCarrito"));
             console.log(myCarrito);
@@ -83,27 +83,50 @@
                 printProducts(response);
             });
 
+            $('.compra').on("click", function () {
+                myCarrito = localStorage.getItem("myCarrito");
+
+                $.ajax({
+                    type: "POST",
+                    data: { "myCarrito": myCarrito,
+                            "nombre":$('#nombre').val(),
+                            "apellidos":$('#apellidos').val(),
+                            "telefono":$('#telefono').val(),
+                            "direccion":$('#direccion').val(),
+                            "tarjetaCredito": $('#tarjetaCredito').val() },
+                    url: "http://10.22.72.108:8080/proyecto_final/CInsertFactura",
+                    datatype: "json",
+                    success: function (response) {
+                        alert(response);
+                        console.log(response);
+                    }, error: function (xhr) {
+                        alert("Ha ocurrido un error" + xhr.status + " " + xhr.estatusText);
+                    }
+                })
+            })
+
             function printProducts(response) {
                 var htmlzatia = '';
-                var total=0;
+                var total = 0;
                 for (j in myCarrito) {
-                    
+
                     for (i in response) {
                         if (myCarrito[j].id == response[i].id_producto) {
-                            total=total+(response[i].precio*myCarrito[j].cant);
+                            total = total + (response[i].precio * myCarrito[j].cant);
                             htmlzatia = '<tr>';
                             htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
                             htmlzatia += '<td>' + response[i].nombre + '</td>';
-                            htmlzatia += '<td><div class="num">' + myCarrito[j].cant+ '<div></td>';
-                            htmlzatia += '<td>' + (response[i].precio*myCarrito[j].cant) + '€</td>'
+                            htmlzatia += '<td><div class="num">' + myCarrito[j].cant + '<div></td>';
+                            htmlzatia += '<td>' + (response[i].precio * myCarrito[j].cant) + '€</td>'
                             htmlzatia += '</tr>';
                             $('tbody').append(htmlzatia);
                         }
                     }
                 }
-                $(".total").html('<b>TOTAL:'+total+'€</b>');
+                $(".total").html('<b>TOTAL:' + total + '€</b>');
             }
-            
+
         });
     </script>
+  
 </body>

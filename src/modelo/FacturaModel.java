@@ -26,8 +26,8 @@ public class FacturaModel extends FacturaClass {
 	 * @param direccion
 	 * @param tarjetaCredito
 	 */
-	public FacturaModel(int id_factura, double total, String nombre, String apellidos, int telefono, String direccion,
-			int tarjetaCredito) {
+	public FacturaModel(int id_factura, double total, String nombre, String apellidos, String telefono, String direccion,
+			String tarjetaCredito) {
 		super(id_factura, total, nombre, apellidos, telefono, direccion, tarjetaCredito);
 		// TODO Auto-generated constructor stub
 	}
@@ -73,9 +73,9 @@ public class FacturaModel extends FacturaClass {
 			myFactura.setTotal(Double.parseDouble(rs.getString(2)));
 			myFactura.setNombre(rs.getString(3));
 			myFactura.setApellidos(rs.getString(4));
-			myFactura.setTelefono(Integer.parseInt(rs.getString(5)));
+			myFactura.setTelefono(rs.getString(5));
 			myFactura.setDireccion(rs.getString(6));
-			myFactura.setTarjetaCredito(Integer.parseInt(rs.getString(7)));
+			myFactura.setTarjetaCredito((rs.getString(7)));
 
 			this.list.add(myFactura);
 		}
@@ -91,12 +91,9 @@ public class FacturaModel extends FacturaClass {
 		this.CreateConection();
 
 		Statement st = this.con.createStatement();
-
-		st.executeUpdate(
-				"INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`,`tarjetaCredito`) VALUES ("
-						+ this.getTotal() + ",'" + this.getNombre() + "','" + this.getApellidos() + "',"
-						+ this.getTelefono() + ",'" + this.getDireccion() + "'," + this.getTarjetaCredito() + ")");
-
+		String sql="CALL InsertDatos_Factura("+this.getTotal()+",'"+this.getNombre()+"','"+this.getApellidos()+"','"+this.getTelefono()+"','"+this.getDireccion()+"','"+this.getTarjetaCredito()+"')";
+		System.out.println(sql);
+		st.executeUpdate(sql);
 		this.disconnect();
 	}
 
