@@ -86,15 +86,17 @@ public class FacturaModel extends FacturaClass {
 	 * @Description Se usa para hacer un insert de datos en factura
 	 * @throws SQLException
 	 */
-	public void insertData() throws SQLException {
+	public int insertData() throws SQLException {
 
 		this.CreateConection();
 
 		Statement st = this.con.createStatement();
 		String sql="CALL InsertDatos_Factura("+this.getTotal()+",'"+this.getNombre()+"','"+this.getApellidos()+"','"+this.getTelefono()+"','"+this.getDireccion()+"','"+this.getTarjetaCredito()+"')";
 		System.out.println(sql);
-		st.executeUpdate(sql);
+		ResultSet rs = st.executeQuery(sql);
 		this.disconnect();
+		rs.next();
+		return rs.getInt("id");
 	}
 
 }

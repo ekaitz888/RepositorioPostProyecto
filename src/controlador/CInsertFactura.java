@@ -58,7 +58,13 @@ public class CInsertFactura extends HttpServlet {
 		double total = 0;
 		FacturaModel myFactura = new FacturaModel();
 		ProductoModel myProduct = new ProductoModel();
-		System.out.println("ir<kurri: " + Nombre);
+		int id=0;
+		
+		
+		
+		
+		
+		
 		try {
 			myProduct.LoadData();
 		} catch (SQLException e) {
@@ -104,7 +110,7 @@ public class CInsertFactura extends HttpServlet {
 		myFactura.setTotal(total);
 
 		try {
-			myFactura.insertData();
+			id=myFactura.insertData();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -125,7 +131,7 @@ public class CInsertFactura extends HttpServlet {
 		for (int j = 0; j < JSONArray.length(); j++) {
 			for (int i = 0; i < myProduct.getList().size(); i++) {
 				if (JSONArray.getJSONObject(j).getInt("id") == myProduct.getList().get(i).getId_producto()) {
-//					myLinea.setId_factura();
+					myLinea.setId_factura(id);
 					myLinea.setId_producto(myProduct.getList().get(i).getId_producto());
 					myLinea.setCantidad(JSONArray.getJSONObject(j).getInt("cant"));
 					myLinea.setPrecio(myProduct.getList().get(i).getPrecio() * JSONArray.getJSONObject(j).getInt("cant"));
