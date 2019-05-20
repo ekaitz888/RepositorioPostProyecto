@@ -3,6 +3,7 @@ package modelo;
 public class LineaClass extends Connect {
 
 	protected int id_linea;
+	protected int id_factura;
 	protected int id_producto;
 	protected double precio;
 	protected int cantidad;
@@ -13,20 +14,6 @@ public class LineaClass extends Connect {
 	public LineaClass() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param id_linea
-	 * @param id_producto
-	 * @param precio
-	 * @param cantidad
-	 */
-	public LineaClass(int id_linea, int id_producto, double precio, int cantidad) {
-		super();
-		this.id_linea = id_linea;
-		this.id_producto = id_producto;
-		this.precio = precio;
-		this.cantidad = cantidad;
 	}
 
 	/**
@@ -42,6 +29,21 @@ public class LineaClass extends Connect {
 	 */
 	public void setId_linea(int id_linea) {
 		this.id_linea = id_linea;
+	}
+
+	/**
+	 * @return the id_factura
+	 */
+	public int getId_factura() {
+		return id_factura;
+	}
+
+	/**
+	 * @param id_factura
+	 *            the id_factura to set
+	 */
+	public void setId_factura(int id_factura) {
+		this.id_factura = id_factura;
 	}
 
 	/**
@@ -89,5 +91,20 @@ public class LineaClass extends Connect {
 		this.cantidad = cantidad;
 	}
 
-	// prueba
+	/**
+	 * @param id_linea
+	 * @param id_factura
+	 * @param id_producto
+	 * @param precio
+	 * @param cantidad
+	 */
+	public LineaClass(int id_linea, int id_factura, int id_producto, double precio, int cantidad) {
+		super();
+		this.id_linea = id_linea;
+		this.id_factura = id_factura;
+		this.id_producto = id_producto;
+		this.precio = precio;
+		this.cantidad = cantidad;
+	}
+
 }

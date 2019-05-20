@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-05-2019 a las 11:03:13
+-- Tiempo de generación: 20-05-2019 a las 08:47:53
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.1.21
 
@@ -31,6 +31,9 @@ DELETE FROM `factura` WHERE factura.id_factura = id$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertDatos_Factura` (IN `total` INT, IN `nombre` VARCHAR(32), IN `apellidos` VARCHAR(32), IN `telefono` INT, IN `direccion` VARCHAR(32), IN `tarjetaCredito` INT)  NO SQL
 INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`) VALUES (total, nombre, apellidos, telefono, direccion, tarjetaCredito)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertDatos_Lineas` (IN `id` INT, IN `cantidad` INT, IN `precio` DOUBLE)  NO SQL
+INSERT INTO `linea`(`id_producto`, `precio`, `cantidad`) VALUES (id, precio, cantidad)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `LoadData_Facturas` ()  NO SQL
 SELECT * FROM `factura`$$
@@ -63,7 +66,6 @@ DELIMITER ;
 
 CREATE TABLE `factura` (
   `id_factura` int(11) NOT NULL,
-  `id_linea` int(11) NOT NULL,
   `total` double DEFAULT NULL,
   `Nombre` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `Apellidos` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
@@ -80,6 +82,7 @@ CREATE TABLE `factura` (
 
 CREATE TABLE `linea` (
   `id_linea` int(11) NOT NULL,
+  `id_factura` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `precio` double DEFAULT NULL,
   `cantidad` int(11) NOT NULL
@@ -140,6 +143,33 @@ INSERT INTO `producto` (`id_producto`, `Nombre`, `precio`, `id_marca`, `imagen`)
 (10, 'Vapormax Flyknit', 180, 2, 'https://image.tfgmedia.co.za/image/1/process/486x486?source=http://cdn.tfgmedia.co.za/06/ProductImages/31702964.jpg'),
 (11, 'Rally pro', 80, 4, 'https://i1.adis.ws/i/hibbett/M0388_0201_right?w=580&h=580&fmt=jpg&bg=rgb(255,255,255)&img404=404&v=0');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `registro_factura`
+--
+
+CREATE TABLE `registro_factura` (
+  `id_factura` int(11) NOT NULL,
+  `id_linea` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `Nombre` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `Apellidos` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `Telefono` int(11) NOT NULL,
+  `Direccion` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `tarjetaCredito` int(11) NOT NULL,
+  `Fecha_eliminacion` datetime NOT NULL,
+  `Usuario` varchar(32) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Disparadores `registro_factura`
+--
+DELIMITER $$
+CREATE TRIGGER `factura_AD` AFTER DELETE ON `registro_factura` FOR EACH ROW INSERT INTO `registro_factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`, `Fecha_eliminacion`, `Usuario`) VALUES (old.total, old.Nombre, old.Apellidos, old.Telefono, old.Direccion, old.tarjetaCredito, now(), CURRENT_USER)
+$$
+DELIMITER ;
+
 --
 -- Índices para tablas volcadas
 --
@@ -148,15 +178,16 @@ INSERT INTO `producto` (`id_producto`, `Nombre`, `precio`, `id_marca`, `imagen`)
 -- Indices de la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD PRIMARY KEY (`id_factura`),
-  ADD KEY `id_linea` (`id_linea`);
+  ADD PRIMARY KEY (`id_factura`);
 
 --
 -- Indices de la tabla `linea`
 --
 ALTER TABLE `linea`
   ADD PRIMARY KEY (`id_linea`),
-  ADD KEY `id_producto` (`id_producto`);
+  ADD UNIQUE KEY `id_factura` (`id_factura`),
+  ADD KEY `id_producto` (`id_producto`),
+  ADD KEY `id_factura_2` (`id_factura`);
 
 --
 -- Indices de la tabla `marca`
@@ -171,6 +202,12 @@ ALTER TABLE `producto`
   ADD PRIMARY KEY (`id_producto`),
   ADD KEY `id_filtros` (`id_marca`),
   ADD KEY `Marca` (`id_marca`);
+
+--
+-- Indices de la tabla `registro_factura`
+--
+ALTER TABLE `registro_factura`
+  ADD PRIMARY KEY (`id_factura`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -201,20 +238,21 @@ ALTER TABLE `producto`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT de la tabla `registro_factura`
 --
+ALTER TABLE `registro_factura`
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Filtros para la tabla `factura`
+-- Restricciones para tablas volcadas
 --
-ALTER TABLE `factura`
-  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id_linea`) REFERENCES `linea` (`id_linea`);
 
 --
 -- Filtros para la tabla `linea`
 --
 ALTER TABLE `linea`
-  ADD CONSTRAINT `linea_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`);
+  ADD CONSTRAINT `linea_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`),
+  ADD CONSTRAINT `linea_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`);
 
 --
 -- Filtros para la tabla `producto`

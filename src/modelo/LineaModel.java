@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class LineaModel extends LineaClass {
 	ArrayList<LineaModel> list = new ArrayList<LineaModel>();
 
+
+
 	/**
 	 * 
 	 */
@@ -18,14 +20,17 @@ public class LineaModel extends LineaClass {
 
 	/**
 	 * @param id_linea
+	 * @param id_factura
 	 * @param id_producto
 	 * @param precio
 	 * @param cantidad
 	 */
-	public LineaModel(int id_linea, int id_producto, double precio, int cantidad) {
-		super(id_linea, id_producto, precio, cantidad);
+	public LineaModel(int id_linea, int id_factura, int id_producto, double precio, int cantidad) {
+		super(id_linea, id_factura, id_producto, precio, cantidad);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	/**
 	 * @param list
@@ -34,7 +39,7 @@ public class LineaModel extends LineaClass {
 		super();
 		this.list = list;
 	}
-
+	
 	/**
 	 * @return the list
 	 */
@@ -43,8 +48,7 @@ public class LineaModel extends LineaClass {
 	}
 
 	/**
-	 * @param list
-	 *            the list to set
+	 * @param list the list to set
 	 */
 	public void setList(ArrayList<LineaModel> list) {
 		this.list = list;
@@ -61,12 +65,23 @@ public class LineaModel extends LineaClass {
 
 			LineaModel myLinea = new LineaModel();
 			myLinea.setId_linea(Integer.parseInt(rs.getString(1)));
-			myLinea.setId_producto(Integer.parseInt(rs.getString(2)));
-			myLinea.setPrecio(Double.parseDouble(rs.getString(3)));
-			myLinea.setCantidad(Integer.parseInt(rs.getString(4)));
+			myLinea.setId_factura(Integer.parseInt(rs.getString(2)));
+			myLinea.setId_producto(Integer.parseInt(rs.getString(3)));
+			myLinea.setPrecio(Double.parseDouble(rs.getString(4)));
+			myLinea.setCantidad(Integer.parseInt(rs.getString(5)));
 
 			this.list.add(myLinea);
 		}
+		this.disconnect();
+	}
+	
+	public void insertData() throws SQLException {
+
+		this.CreateConection();
+
+		Statement st = this.con.createStatement();
+		ResultSet rs = st.executeQuery("CALL insertDatos_Lineas");
+
 		this.disconnect();
 	}
 	// prueba

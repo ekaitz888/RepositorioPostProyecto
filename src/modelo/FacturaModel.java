@@ -19,7 +19,6 @@ public class FacturaModel extends FacturaClass {
 
 	/**
 	 * @param id_factura
-	 * @param id_linea
 	 * @param total
 	 * @param nombre
 	 * @param apellidos
@@ -27,9 +26,9 @@ public class FacturaModel extends FacturaClass {
 	 * @param direccion
 	 * @param tarjetaCredito
 	 */
-	public FacturaModel(int id_factura, int id_linea, double total, String nombre, String apellidos, int telefono,
-			String direccion, int tarjetaCredito) {
-		super(id_factura, id_linea, total, nombre, apellidos, telefono, direccion, tarjetaCredito);
+	public FacturaModel(int id_factura, double total, String nombre, String apellidos, int telefono, String direccion,
+			int tarjetaCredito) {
+		super(id_factura, total, nombre, apellidos, telefono, direccion, tarjetaCredito);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -71,13 +70,12 @@ public class FacturaModel extends FacturaClass {
 
 			FacturaModel myFactura = new FacturaModel();
 			myFactura.setId_factura(Integer.parseInt(rs.getString(1)));
-			myFactura.setId_linea(Integer.parseInt(rs.getString(2)));
-			myFactura.setTotal(Double.parseDouble(rs.getString(3)));
-			myFactura.setNombre(rs.getString(4));
-			myFactura.setApellidos(rs.getString(5));
-			myFactura.setTelefono(Integer.parseInt(rs.getString(6)));
-			myFactura.setDireccion(rs.getString(7));
-			myFactura.setTarjetaCredito(Integer.parseInt(rs.getString(8)));
+			myFactura.setTotal(Double.parseDouble(rs.getString(2)));
+			myFactura.setNombre(rs.getString(3));
+			myFactura.setApellidos(rs.getString(4));
+			myFactura.setTelefono(Integer.parseInt(rs.getString(5)));
+			myFactura.setDireccion(rs.getString(6));
+			myFactura.setTarjetaCredito(Integer.parseInt(rs.getString(7)));
 
 			this.list.add(myFactura);
 		}
@@ -94,8 +92,10 @@ public class FacturaModel extends FacturaClass {
 
 		Statement st = this.con.createStatement();
 
-		st.executeUpdate("INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`,`tarjetaCredito`) VALUES ("+this.getTotal()+",'"+this.getNombre()+"','"+this.getApellidos()+"',"+this.getTelefono()+",'"+this.getDireccion()+"',"+this.getTarjetaCredito()+")");
-
+		st.executeUpdate(
+				"INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`,`tarjetaCredito`) VALUES ("
+						+ this.getTotal() + ",'" + this.getNombre() + "','" + this.getApellidos() + "',"
+						+ this.getTelefono() + ",'" + this.getDireccion() + "'," + this.getTarjetaCredito() + ")");
 
 		this.disconnect();
 	}
