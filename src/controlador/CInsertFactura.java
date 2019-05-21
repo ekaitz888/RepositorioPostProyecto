@@ -135,13 +135,14 @@ public class CInsertFactura extends HttpServlet {
 					myLinea.setId_producto(myProduct.getList().get(i).getId_producto());
 					myLinea.setCantidad(JSONArray.getJSONObject(j).getInt("cant"));
 					myLinea.setPrecio(myProduct.getList().get(i).getPrecio() * JSONArray.getJSONObject(j).getInt("cant"));
+					System.out.println(myLinea.getId_producto() + " " + myLinea.getCantidad() + " " + myLinea.getPrecio()+" "+myLinea.getId_factura()+" "+myLinea.getId_linea());
 					try {
 						myLinea.insertData();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					System.out.println(myLinea.getId_producto() + " " + myLinea.getCantidad() + " " + myLinea.getPrecio());
+					
 				}
 			}
 		}
