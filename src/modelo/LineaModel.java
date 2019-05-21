@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.PreparedStatement;
+
 public class LineaModel extends LineaClass {
 	ArrayList<LineaModel> list = new ArrayList<LineaModel>();
 
@@ -82,6 +84,21 @@ public class LineaModel extends LineaClass {
 		Statement st = this.con.createStatement();
 		ResultSet rs = st.executeQuery("CALL insertDatos_Lineas("+this.getId_factura()+","+this.getId_producto()+","+this.getPrecio()+","+this.getCantidad()+")");
 
+//		PreparedStatement pst;
+//		int idLinea=0;
+//		
+//		pst = this.con.prepareStatement("call InsertDatos_Lineas(?,?,?,?)");
+//		
+//		pst.setInt(1, this.id_factura);
+//		pst.setInt(2, this.id_producto);
+//		pst.setDouble(3, this.precio);
+//		pst.setInt(4, this.cantidad);
+//		
+//		ResultSet rs = pst.executeQuery();
+//		if(rs.next()) {
+//			idLinea=rs.getInt("id_linea");
+//		}
+//		
 		this.disconnect();
 	}
 	// prueba
