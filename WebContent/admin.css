@@ -1,0 +1,15 @@
+.factura{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    
+}
+
+.datos{
+background-color: white;
+}
+
+.productos{
+background-color: white;
+
+}

@@ -80,7 +80,7 @@ public class LineaModel extends LineaClass {
 		this.CreateConection();
 
 		Statement st = this.con.createStatement();
-		ResultSet rs = st.executeQuery("CALL insertDatos_Lineas");
+		ResultSet rs = st.executeQuery("CALL insertDatos_Lineas("+this.getId_factura()+","+this.getId_producto()+","+this.getPrecio()+","+this.getCantidad()+")");
 
 		this.disconnect();
 	}
