@@ -11,6 +11,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="factura.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>Factura</title>
 </head>
@@ -23,25 +24,10 @@
 
     <div class="background">
 
-        <div class="form">
+        <div class="pago">
+            <h2><b>Tu pedido ha sido pagado con exito</b></h2>
+            <div class="datosPersonales"></div>
         </div>
-    </div>
-
-    <div class="tabla">
-        <table>
-            <thead>
-                <div class="titulo">
-                    <h5>Productos Comprados</h5>
-                </div>
-                <tr>
-                    <td>Imagen</td>
-                    <td>Nombre</td>
-                    <td>Cantidad</td>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
     </div>
 
 
@@ -57,47 +43,42 @@
             var myCarrito = JSON.parse(localStorage.getItem("myCarrito"));
             console.log(myCarrito);
             var urlFactura = 'http://10.22.72.108:8080/proyecto_final/CJsonFactura';
-            var urlProducto = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
+            var urlLinea = 'http://10.22.72.108:8080/proyecto_final/CJsonLinea';
+
+            var facturas;
+            var Linea;
 
 
-            $.getJSON(urlProducto, function (response) {
+            $.getJSON(urlLinea, function (response) {
                 console.log(response);
-                printProducts(response);
+                Linea = response;
+
             });
 
             $.getJSON(urlFactura, function (response) {
                 console.log(response);
-                printFactura(response);
+                facturas = response;
+                printFactura(response, Linea);
             });
 
-            function printProducts(response) {
+            function printFactura(response, Linea) {
                 var htmlzatia = '';
-                for (j in myCarrito) {
+                for (i in facturas) {
 
-                    for (i in response) {
-                        if (myCarrito[j].id == response[i].id_producto) {
-                            htmlzatia = '<tr>';
-                            htmlzatia += '<td><img src="' + response[i].imagen + '"></td>';
-                            htmlzatia += '<td>' + response[i].nombre + '</td>';
-                            htmlzatia += '<td><div class="num">' + myCarrito[j].cant + '<div></td>';
-                            htmlzatia += '</tr>';
-                            $('tbody').append(htmlzatia);
-                        }
+                    
+                    if (facturas[i].id_factura == Linea[i].id_factura) {
+                        htmlzatia = '<div class="container">';
+                        htmlzatia += '<div>' + facturas[i].Nombre + '</div>';
+                        htmlzatia += '<div>' + facturas[i].Apellidos + '</div>';
+                        htmlzatia += '<div>' + facturas[i].Telefono + '</div>';
+                        htmlzatia += '<div>' + facturas[i].Direccion + '</div>';
+                        htmlzatia += '</div>';
+                        htmlzatia += '<div>';
+                        htmlzatia += '<div>' + Linea[i].Nombre + '</div>';
+                        htmlzatia += '</div>';
+
+                        $('.datosPersonales').append(htmlzatia);
                     }
-                }
-            }
-
-            function printFactura(response) {
-                var htmlzatia = '';
-                for (i in Response) {
-
-                    htmlzatia = '<div class="">';
-                    htmlzatia += '<div>' + response[i].Nombre + '</div>';
-                    htmlzatia += '<div>' + response[i].Apellidos + '</div>';
-                    htmlzatia += '<div>' + response[i].Telefono + '</div>';
-                    htmlzatia += '<div>' + response[i].Direccion + '</div>';
-                    htmlzatia += '</div>';
-                    $()
                 }
             }
         });
