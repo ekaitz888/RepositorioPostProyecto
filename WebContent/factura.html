@@ -44,39 +44,62 @@
             console.log(myCarrito);
             var urlFactura = 'http://10.22.72.108:8080/proyecto_final/CJsonFactura';
             var urlLinea = 'http://10.22.72.108:8080/proyecto_final/CJsonLinea';
+            var urlProducto = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
 
             var facturas;
-            var Linea;
+            var linea;
+            var producto;
 
-
-            $.getJSON(urlLinea, function (response) {
+            $.getJSON(urlProducto, function (response) {
                 console.log(response);
-                Linea = response;
+                producto = response;
+                $.getJSON(urlLinea, function (response) {
+                    console.log(response);
+                    linea = response;
+                    $.getJSON(urlFactura, function (response) {
+                        console.log(response);
+                        facturas = response;
+                        printFactura();
+                    });
 
+                });
             });
 
-            $.getJSON(urlFactura, function (response) {
-                console.log(response);
-                facturas = response;
-                printFactura(response, Linea);
-            });
 
-            function printFactura(response, Linea) {
+
+            function printFactura() {
                 var htmlzatia = '';
+                var limite = facturas.length - 1;
                 for (i in facturas) {
+                    if (i == limite) {
 
-                    
-                    if (facturas[i].id_factura == Linea[i].id_factura) {
-                        htmlzatia = '<div class="container">';
-                        htmlzatia += '<div>' + facturas[i].Nombre + '</div>';
-                        htmlzatia += '<div>' + facturas[i].Apellidos + '</div>';
-                        htmlzatia += '<div>' + facturas[i].Telefono + '</div>';
-                        htmlzatia += '<div>' + facturas[i].Direccion + '</div>';
+                        htmlzatia = '<div class="container edit">';
+                        htmlzatia += '<div><b>Nombre:</b> ' + facturas[i].Nombre + '</div>';
+                        htmlzatia += '<div><b>Apellidos:</b> ' + facturas[i].Apellidos + '</div>';
+                        htmlzatia += '<div><b>Telefono:</b> ' + facturas[i].Telefono + '</div>';
+                        htmlzatia += '<div><b>Direccion:</b> ' + facturas[i].Direccion + '</div>';
                         htmlzatia += '</div>';
+                        htmlzatia += '<br>'
+                        htmlzatia += '<div class="scrollable" style="overflow-y:scroll; height:200px;">';
+                        for (j in linea) {
+                            if (facturas[i].id_factura == linea[j].id_factura) {
+                                for (k in producto) {
+                                    if (linea[j].id_producto == producto[k].id_producto) {
+                                        htmlzatia += '<div>';
+                                        htmlzatia += '<br>'
+                                        htmlzatia += '<div><b>Nombre del Producto:</b> ' + producto[k].nombre + '</div>';
+                                        htmlzatia += '<div><b>Precio del Producto:</b> ' + producto[k].precio + ' x ' + linea[k].cantidad + '</div>';
+                                        htmlzatia += '</div>';
+                                    }
+
+                                }
+                            }
+                        }
+                        htmlzatia += '</div>';
+                        htmlzatia += '<br>'
                         htmlzatia += '<div>';
-                        htmlzatia += '<div>' + Linea[i].Nombre + '</div>';
+                        htmlzatia += '<div><b>Total: ' + facturas[i].total + '</b></div>';
                         htmlzatia += '</div>';
-
                         $('.datosPersonales').append(htmlzatia);
                     }
                 }

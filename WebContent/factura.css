@@ -5,8 +5,14 @@
     height: 500px;
     background-color: white;
     text-align: center;
+    flex-direction: column;
 }
 
 .datosPersonales{
-    
+    height: 310px;
+    border-radius: 5px;
+    background-color: white;
+}
+.scrollable{
+    border-radius: 200px black;
 }

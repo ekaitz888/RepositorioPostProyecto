@@ -64,11 +64,11 @@ public class LineaModel extends LineaClass {
 		while (rs.next()) { // reads the table line by line
 
 			LineaModel myLinea = new LineaModel();
-			myLinea.setId_linea(Integer.parseInt(rs.getString(1)));
-			myLinea.setId_factura(Integer.parseInt(rs.getString(2)));
-			myLinea.setId_producto(Integer.parseInt(rs.getString(3)));
-			myLinea.setPrecio(Double.parseDouble(rs.getString(4)));
-			myLinea.setCantidad(Integer.parseInt(rs.getString(5)));
+			myLinea.setId_linea(Integer.parseInt(rs.getString("id_linea")));
+			myLinea.setId_factura(Integer.parseInt(rs.getString("id_factura")));
+			myLinea.setId_producto(Integer.parseInt(rs.getString("id_producto")));
+			myLinea.setPrecio(Double.parseDouble(rs.getString("precio")));
+			myLinea.setCantidad(Integer.parseInt(rs.getString("cantidad")));
 
 			this.list.add(myLinea);
 		}
