@@ -8,4 +8,53 @@
 .laukizuzena{
     background-color: white;
     margin: 8px;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 750px;
+    height: 250px;
 }
+body{
+    background-color: gray;
+}
+img{
+    width: 100px;
+}
+.logo{
+    width: 210px;
+    float: left;
+    margin-left: 20px;
+}
+.compra{
+    background-color: palevioletred;
+    padding: 20px;
+    border-radius: 15px;
+    border: solid 1px palevioletred;
+    margin-top: 20px;
+}
+.background{
+    margin-top: 50px; 
+    display: flex;
+    justify-content: center;
+}
+.datosPersonales{
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+.datosProducto{
+    display: flex;
+    flex-grow: 1;
+}
+.nombre{
+   width: 100%;
+}
+.telefono{
+    width: 100%;
+}
+.direccion{
+   width: 100%;
+}
+.factura{
+    
+}
+

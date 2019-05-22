@@ -9,7 +9,6 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Document</title>
     <link rel="stylesheet" href="admin.css">
-    <link rel="stylesheet" href="form.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 
@@ -18,10 +17,7 @@
         <a class="navbar-brandn" href="index.html"><img class="logo" src="img/gusPieEshop.png"></a>
     </nav>
     <div class="background">
-        <div class="container">
-            <div class="factura">
-                <div class="productos"></div>
-            </div>
+        <div class="factura">
         </div>
     </div>
 
@@ -36,71 +32,76 @@
         crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
-            var myCarrito = JSON.parse(localStorage.getItem("myCarrito"));
-            console.log(myCarrito);
+            
             var urlFactura = 'http://10.22.72.108:8080/proyecto_final/CJsonFactura';
-            var urlProducto = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
+            var urlLinea = 'http://10.22.72.108:8080/proyecto_final/CJsonLinea';
 
             var facturas;
-            var productos;
+            var linea;
 
             $.getJSON(urlFactura, function (response) {
                 console.log(response);
-                facturas= response;
-                printFacturas();
+                facturas = response;
+                printFacturas(facturas);
 
 
             });
-            
-                        $.getJSON(urlProducto, function (response) {
-                            console.log(response);
-                            productos=response;
-                            
-                        });
-            
-            function printFacturas() {
+
+            $.getJSON(urlLinea, function (response) {
+                /* console.log(response); */
+                linea = response;
+
+            });
+
+            function printFacturas(facturas) {
                 var htmlzatia = '';
-                for (i in facturas) {
+                
+                for(i in facturas){
+                    var cant=0;
+                    }
+                    console.log(facturas[i]);
                     htmlzatia = '<div class="laukizuzena" data-id="'+facturas[i].id_factura+'">';
                     htmlzatia += '<div class="datosPersonales">';
-                    htmlzatia += '<div>Nombre:' + facturas[i].Nombre + '</div>';
-                    htmlzatia += '<div>Apellidos:' + facturas[i].Apellidos + '</div>';
-                    htmlzatia += '<div>Telefono:' + facturas[i].Telefono + '</div>';
-                    htmlzatia += '<div>Direccion:' + facturas[i].Direccion + '</div>';
+                    htmlzatia += '<div class="nombre">nombre: '+facturas[i].Nombre+' '+facturas[i].Apellidos+'</div>';
+                    htmlzatia += '<div class="telefono">teléfono: '+facturas[i].Telefono+'</div>';
+                    htmlzatia += '<div class="direccion">dirección: '+facturas[i].Direccion+'</div>';
                     htmlzatia += '</div>';
-                    htmlzatia += '<div class="datosProducto" >';
+                    htmlzatia += '<div class="datosProducto>';
+                    htmlzatia += '<div class="cantidad">Cantidad:'+0+'</div>';
+                    htmlzatia += '<div class="total"><b>TOTAL:'+facturas[i].total+'</div>';
                     htmlzatia += '</div>';
                     htmlzatia += '</div>';
                     $('.factura').append(htmlzatia);
                 }
-                $('.laukizuzena').on('click',  function () {
-                    
-                    
-                    $('.laukizuzena[data-id="'+$(this).data('id')+'"]').children('.datosProducto').slideDown(); 
-                    printProductos();
+            $('.laukizuzena').on('click', function () {
 
-                });
-            }
-             function printProductos() { 
+
+                $('.laukizuzena[data-id="' + $(this).data('id') + '"]').children('.datosProducto').slideDown();
+                printProductos();
+
+            });
+
+            function printProductos() {
                 var htmlzatia = '';
-                        for (j in myCarrito) {
+                for (j in facturas) {
 
-                            for (i in productos) {
-                                
-                                if (myCarrito[j].id == productos[i].id_producto) {
-                                    console.log(myCarrito);
-                                    htmlzatia = '<tr>';
-                                    htmlzatia += '<td><img src="' + productos[i].imagen + '"></td>';
-                                    htmlzatia += '<td>' + productos[i].nombre + '</td>';
-                                    htmlzatia += '<td><div class="num">' + myCarrito[j].cant + '<div></td>';
-                                    htmlzatia += '</tr>';
-                                    $('.datosProducto').append(htmlzatia);
-                                }
-                            }
+                    for (i in linea) {
+
+                        if (facturas[j].id == linea[i].id_producto) {
+                            console.log(facturas);
+                            htmlzatia = '<tr>';
+                            htmlzatia += '<td><img src="' + linea[i].imagen + '"></td>';
+                            htmlzatia += '<td>' + linea[i].nombre + '</td>';
+                            htmlzatia += '<td><div class="num">' + facturas[j].cant + '<div></td>';
+                            htmlzatia += '</tr>';
+                            $('.datosLineas').append(htmlzatia);
                         }
-                     } 
+                    }
+                }
+            }
 
-        });
+        }
+    });
 
 
     </script>
