@@ -87,7 +87,7 @@ public class FacturaModel extends FacturaClass {
 	 * @throws SQLException
 	 */
 	public int insertData() throws SQLException {
-
+		int id=0;
 		this.CreateConection();
 
 		Statement st = this.con.createStatement();
@@ -95,8 +95,10 @@ public class FacturaModel extends FacturaClass {
 		System.out.println(sql);
 		ResultSet rs = st.executeQuery(sql);
 		this.disconnect();
-		rs.next();
-		return rs.getInt("id");
+		if (rs.next()) {
+			 id=rs.getInt("id");
+		}
+		return id;
 	}
 
 }

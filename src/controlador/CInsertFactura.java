@@ -123,10 +123,10 @@ public class CInsertFactura extends HttpServlet {
 
 		LineaModel myLinea = new LineaModel();
 
-		// response.setHeader("Access-Control-Allow-Origin", "*"); // json deia denean
-		// ez da behar
-		// response.setContentType("application/json"); // json bihurtzeko erabiltzen da
-		// response.setCharacterEncoding("UTF-8");
+//		 response.setHeader("Access-Control-Allow-Origin", "*"); // json deia denean
+//		// ez da behar
+//		 response.setContentType("application/json"); // json bihurtzeko erabiltzen da
+//		 response.setCharacterEncoding("UTF-8");
 
 		for (int j = 0; j < JSONArray.length(); j++) {
 			for (int i = 0; i < myProduct.getList().size(); i++) {
