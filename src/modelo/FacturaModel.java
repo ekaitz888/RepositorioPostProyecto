@@ -102,7 +102,7 @@ public class FacturaModel extends FacturaClass {
 	}
 	
 	public void deletetData() throws SQLException {
-		int id=0;
+		
 		this.CreateConection();
 
 		Statement st = this.con.createStatement();

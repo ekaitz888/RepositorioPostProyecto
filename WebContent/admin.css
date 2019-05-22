@@ -1,16 +1,19 @@
 .factura{
     display: flex;
+    justify-content: center;
     flex-direction: column;
     
-    
 }
-
+.productos{
+    display: flex;
+    justify-content: space-between;
+}
 .laukizuzena{
     background-color: white;
     margin-top: 8px;
     display: flex;
+    width: 33%;
     flex-direction: column;
-    width: 1000px;
 }
 body{
     background-color: gray;
@@ -27,7 +30,8 @@ img{
 .background{
     margin-top: 50px; 
     display: flex;
-    justify-content: center;
+    text-align: center;
+    flex-direction: column;
 }
 .datosProductos{
     max-height: 250px;
@@ -56,4 +60,35 @@ img{
 .cuerpo{
     display: none;
     
+}
+.borrar{
+    color: red;
+    text-align: end;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+.borrar:hover{
+    text-decoration: underline
+}
+.index{
+    background-color: palevioletred;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: solid 1px palevioletred;
+    margin-top: 20px;
+    width: 150px;
+    text-align: center;
+}
+.index:hover{
+    text-decoration: underline white;
+}
+a{
+    height: 64px;
+    width: 150px;
+    
+}
+.footer{
+    text-align: end;
 }

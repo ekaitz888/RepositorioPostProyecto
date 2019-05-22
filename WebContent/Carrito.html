@@ -61,7 +61,7 @@
 
 
             //getJeson
-            var url = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
+            var url = 'http://localhost:8080/proyecto_final/CJsonProducto';
             $.getJSON(url, function (response) {
                 console.log(response);
                 printProducts(response);
@@ -183,7 +183,7 @@
                     $(this).closest('.tabla').siblings('.footer').children(".total").html('<b>'+total + '€</b>');
                     myString = JSON.stringify(myCarrito);
                     localStorage.setItem("myCarrito", myString);
-
+                    
                 })
 
                 //Borrar producto

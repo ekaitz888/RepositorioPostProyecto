@@ -19,6 +19,11 @@
     <div class="background">
         <div class="factura">
         </div>
+        <div class="footer">
+            <a href="index.html">
+                <div class="index">Volver al index</div>
+            </a>
+        </div>
     </div>
 
 
@@ -33,21 +38,23 @@
     <script>
         $(document).ready(function () {
 
-            var urlFactura = 'http://10.22.72.108:8080/proyecto_final/CJsonFactura';
-            var urlLinea = 'http://10.22.72.108:8080/proyecto_final/CJsonLinea';
-            var urlProducto = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
+            var urlFactura = 'http://localhost:8080/proyecto_final/CJsonFactura';
+            var urlLinea = 'http://localhost:8080/proyecto_final/CJsonLinea';
+            var urlProducto = 'http://localhost:8080/proyecto_final/CJsonProducto';
             var facturas;
             var linea;
             var productos;
 
             $.getJSON(urlProducto, function (response) {
                 productos = response;
+                console.log(productos);
                 $.getJSON(urlLinea, function (response) {
                     /* console.log(response); */
-                    linea = response;
+                    linea = response
+                    console.log(linea);
                     $.getJSON(urlFactura, function (response) {
-                        console.log(response);
                         facturas = response;
+                        console.log(facturas);
                         printFacturas(facturas, linea, productos);
 
                     });
@@ -57,7 +64,7 @@
 
             function printFacturas(facturas, linea, productos) {
                 var htmlzatia = '';
-
+                var arrFactura = [];
                 console.log(linea)
                 for (i in facturas) {
 
@@ -71,31 +78,63 @@
                     htmlzatia += '<div class="direccion">dirección: ' + facturas[i].Direccion + '</div>';
                     htmlzatia += '</div>';
                     htmlzatia += '<div class="datosProductos">';
-                    
+
                     for (j in linea) {
                         for (k in productos) {
                             if (facturas[i].id_factura == linea[j].id_factura && linea[j].id_producto == productos[k].id_producto) {
                                 cant = cant + linea[j].cantidad;
-                                
-                                htmlzatia += '<div class="row">';
+
+                                htmlzatia += '<div class="row productos">';
                                 htmlzatia += '<div class="imagen"><img src="' + productos[k].imagen + '"></div>';
                                 htmlzatia += '<div class="productoNombre">' + productos[k].nombre + '</div>';
+                                htmlzatia += '<div class="cantProductos">Cantidad: ' + linea[j].cantidad + " TOTAL: " + linea[j].total + '€</div>';
                                 htmlzatia += '</div>';
 
                             }
                         }
                     }
-                        htmlzatia += '</div>';
-                        htmlzatia += '<div class="footer">';
-                        htmlzatia += '<div class="cantidad">Cantidad:' + cant + '</div>';
-                        htmlzatia += '<div class="total"><b>TOTAL:' + facturas[i].total + '</b></div>';
-                        htmlzatia += '</div>';
-                        htmlzatia += '</div>';
+                    htmlzatia += '</div>';
+                    htmlzatia += '<div class="footer">';
+                    htmlzatia += '<div class="cantidad">Cantidad:' + cant + '</div>';
+                    htmlzatia += '<div class="total"><b>TOTAL:' + facturas[i].total + '</b></div>';
+                    htmlzatia += '<div class="borrar">Eliminar</div>';
+                    htmlzatia += '</div>';
+                    htmlzatia += '</div>';
 
-                        $('.factura').append(htmlzatia);
-                    }
+                    $('.factura').append(htmlzatia);
+                }
+                $('.borrar').on("click", function () {
+
+                    var myObjeto = new Object();
+
+                    myObjeto.id = ($(this).closest(".laukizuzena").data('id'));
+                    console.log(myObjeto);
+                    arrFactura.push(myObjeto);
+                    console.log(arrFactura);
+                    myString = JSON.stringify(arrFactura);
+                    console.log(myString);
+                    $(this).closest('.laukizuzena').fadeOut();
+                });
             }
-            
+            $('.index').on("click", function () {
+
+                $.ajax({
+                    type: "POST",
+                    data: {
+                        "arrFactura": myString
+                    },
+                    url: "http://localhost:8080/proyecto_final/CDeleteFactura",
+                    datatype: "json",
+                    success: function (response) {
+                        alert(response);
+                        console.log(response);
+                    }, error: function (xhr) {
+                        alert("Ha ocurrido un error" + xhr.status + " " + xhr.estatusText);
+                    }
+                })
+
+            })
+
         });
 
 

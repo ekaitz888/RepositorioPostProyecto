@@ -76,7 +76,7 @@
         $(document).ready(function () {
             var myCarrito = JSON.parse(localStorage.getItem("myCarrito"));
             console.log(myCarrito);
-            var url = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
+            var url = 'http://localhost:8080/proyecto_final/CJsonProducto';
 
             $.getJSON(url, function (response) {
                 console.log(response);
@@ -94,7 +94,7 @@
                             "telefono":$('#telefono').val(),
                             "direccion":$('#direccion').val(),
                             "tarjetaCredito": $('#tarjetaCredito').val() },
-                    url: "http://10.22.72.108:8080/proyecto_final/CInsertFactura",
+                    url: "http://localhost:8080/proyecto_final/CInsertFactura",
                     datatype: "json",
                     success: function (response) {
                         alert(response);
