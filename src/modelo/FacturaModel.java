@@ -100,5 +100,16 @@ public class FacturaModel extends FacturaClass {
 		}
 		return id;
 	}
+	
+	public void deletetData() throws SQLException {
+		int id=0;
+		this.CreateConection();
+
+		Statement st = this.con.createStatement();
+		String sql="CALL Delete_Factura("+this.id_factura+")";
+		System.out.println(sql);
+		ResultSet rs = st.executeQuery(sql);
+		this.disconnect();
+	}
 
 }
