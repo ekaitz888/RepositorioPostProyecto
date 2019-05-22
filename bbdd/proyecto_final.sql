@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2019 a las 08:47:53
+-- Tiempo de generación: 22-05-2019 a las 09:10:35
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.1.21
 
@@ -27,13 +27,25 @@ DELIMITER $$
 -- Procedimientos
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Delete_Factura` (IN `id` INT)  NO SQL
-DELETE FROM `factura` WHERE factura.id_factura = id$$
+BEGIN
+DELETE FROM `linea` WHERE linea.id_factura = id;
+DELETE FROM factura WHERE factura.id_factura = id;
+END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertDatos_Factura` (IN `total` INT, IN `nombre` VARCHAR(32), IN `apellidos` VARCHAR(32), IN `telefono` INT, IN `direccion` VARCHAR(32), IN `tarjetaCredito` INT)  NO SQL
-INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`) VALUES (total, nombre, apellidos, telefono, direccion, tarjetaCredito)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertDatos_Factura` (IN `total` INT, IN `nombre` VARCHAR(32), IN `apellidos` VARCHAR(32), IN `telefono` VARCHAR(9), IN `direccion` VARCHAR(32), IN `tarjetaCredito` VARCHAR(16))  NO SQL
+BEGIN
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertDatos_Lineas` (IN `id` INT, IN `cantidad` INT, IN `precio` DOUBLE)  NO SQL
-INSERT INTO `linea`(`id_producto`, `precio`, `cantidad`) VALUES (id, precio, cantidad)$$
+INSERT INTO `factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`) VALUES (total, nombre, apellidos, telefono, direccion, tarjetaCredito);
+
+SELECT LAST_INSERT_ID() as id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertDatos_Lineas` (IN `id_producto` INT, IN `cantidad` INT, IN `precio` DOUBLE, IN `id_factura` INT)  NO SQL
+BEGIN
+
+INSERT INTO `linea`(`id_factura`, `id_producto`, `precio`, `cantidad`) VALUES (id_factura, id_producto, precio, cantidad);
+
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `LoadData_Facturas` ()  NO SQL
 SELECT * FROM `factura`$$
@@ -69,10 +81,18 @@ CREATE TABLE `factura` (
   `total` double DEFAULT NULL,
   `Nombre` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `Apellidos` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `Telefono` int(12) NOT NULL,
+  `Telefono` varchar(9) COLLATE utf8_unicode_ci NOT NULL,
   `Direccion` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `tarjetaCredito` int(16) NOT NULL
+  `tarjetaCredito` varchar(16) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Disparadores `factura`
+--
+DELIMITER $$
+CREATE TRIGGER `factura_AD` AFTER DELETE ON `factura` FOR EACH ROW INSERT INTO `registro_factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`, `Fecha_eliminacion`, `Usuario`) VALUES (old.total, old.Nombre, old.Apellidos, old.Telefono, old.Direccion, old.tarjetaCredito, now(), CURRENT_USER)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -163,12 +183,19 @@ CREATE TABLE `registro_factura` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Disparadores `registro_factura`
+-- Volcado de datos para la tabla `registro_factura`
 --
-DELIMITER $$
-CREATE TRIGGER `factura_AD` AFTER DELETE ON `registro_factura` FOR EACH ROW INSERT INTO `registro_factura`(`total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`, `Fecha_eliminacion`, `Usuario`) VALUES (old.total, old.Nombre, old.Apellidos, old.Telefono, old.Direccion, old.tarjetaCredito, now(), CURRENT_USER)
-$$
-DELIMITER ;
+
+INSERT INTO `registro_factura` (`id_factura`, `id_linea`, `total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`, `Fecha_eliminacion`, `Usuario`) VALUES
+(1, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 134, '2019-05-21 14:48:11', 'root@localhost'),
+(2, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 54352, '2019-05-22 09:00:50', 'root@localhost'),
+(3, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 32431, '2019-05-22 09:00:50', 'root@localhost'),
+(4, 0, 760, '', '', 0, '', 0, '2019-05-22 09:00:50', 'root@localhost'),
+(5, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 532, '2019-05-22 09:00:50', 'root@localhost'),
+(6, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 31543, '2019-05-22 09:00:50', 'root@localhost'),
+(7, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 324523, '2019-05-22 09:00:50', 'root@localhost'),
+(8, 0, 760, 'Asier', 'Gusmano Rodriguez', 12345678, 'Su puta casa', 312423532, '2019-05-22 09:04:08', 'root@localhost'),
+(9, 0, 22750, 'Asier', 'Gusmano Rodriguez', 12345678, 'Sillycon Valley', 254252, '2019-05-22 09:09:58', 'root@localhost');
 
 --
 -- Índices para tablas volcadas
@@ -185,9 +212,8 @@ ALTER TABLE `factura`
 --
 ALTER TABLE `linea`
   ADD PRIMARY KEY (`id_linea`),
-  ADD UNIQUE KEY `id_factura` (`id_factura`),
-  ADD KEY `id_producto` (`id_producto`),
-  ADD KEY `id_factura_2` (`id_factura`);
+  ADD KEY `id_factura` (`id_factura`),
+  ADD KEY `id_producto` (`id_producto`);
 
 --
 -- Indices de la tabla `marca`
@@ -217,13 +243,13 @@ ALTER TABLE `registro_factura`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `linea`
 --
 ALTER TABLE `linea`
-  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `marca`
@@ -241,7 +267,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `registro_factura`
 --
 ALTER TABLE `registro_factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
@@ -251,8 +277,8 @@ ALTER TABLE `registro_factura`
 -- Filtros para la tabla `linea`
 --
 ALTER TABLE `linea`
-  ADD CONSTRAINT `linea_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`),
-  ADD CONSTRAINT `linea_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`);
+  ADD CONSTRAINT `linea_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`),
+  ADD CONSTRAINT `linea_ibfk_3` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`);
 
 --
 -- Filtros para la tabla `producto`
