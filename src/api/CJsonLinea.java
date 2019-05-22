@@ -48,8 +48,10 @@ public class CJsonLinea extends HttpServlet {
 				for (int i = 0; i < myLinea.getList().size(); i++) {
 					JSONObject jsonObject = new JSONObject();
 					jsonObject.put("id_linea", myLinea.getList().get(i).getId_linea());
-					jsonObject.put("id_factura", myLinea.getList().get(i).getId_producto());
+					jsonObject.put("id_factura", myLinea.getList().get(i).getId_factura());
+					jsonObject.put("id_producto", myLinea.getList().get(i).getId_producto());
 					jsonObject.put("total", myLinea.getList().get(i).getPrecio());
+					jsonObject.put("cantidad", myLinea.getList().get(i).getCantidad());
 					jsonArray.add(jsonObject);
 				}
 
