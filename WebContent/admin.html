@@ -32,76 +32,71 @@
         crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
-            
+
             var urlFactura = 'http://10.22.72.108:8080/proyecto_final/CJsonFactura';
             var urlLinea = 'http://10.22.72.108:8080/proyecto_final/CJsonLinea';
-
+            var urlProducto = 'http://10.22.72.108:8080/proyecto_final/CJsonProducto';
             var facturas;
             var linea;
+            var productos;
 
-            $.getJSON(urlFactura, function (response) {
-                console.log(response);
-                facturas = response;
-                printFacturas(facturas);
+            $.getJSON(urlProducto, function (response) {
+                productos = response;
+                $.getJSON(urlLinea, function (response) {
+                    /* console.log(response); */
+                    linea = response;
+                    $.getJSON(urlFactura, function (response) {
+                        console.log(response);
+                        facturas = response;
+                        printFacturas(facturas, linea, productos);
 
-
+                    });
+                });
             });
 
-            $.getJSON(urlLinea, function (response) {
-                /* console.log(response); */
-                linea = response;
 
-            });
-
-            function printFacturas(facturas) {
+            function printFacturas(facturas, linea, productos) {
                 var htmlzatia = '';
-                
-                for(i in facturas){
-                    var cant=0;
-                    }
-                    console.log(facturas[i]);
-                    htmlzatia = '<div class="laukizuzena" data-id="'+facturas[i].id_factura+'">';
+
+                console.log(linea)
+                for (i in facturas) {
+
+                    var cant = 0;
+
+
+                    htmlzatia = '<div class="laukizuzena" data-id="' + facturas[i].id_factura + '">';
                     htmlzatia += '<div class="datosPersonales">';
-                    htmlzatia += '<div class="nombre">nombre: '+facturas[i].Nombre+' '+facturas[i].Apellidos+'</div>';
-                    htmlzatia += '<div class="telefono">teléfono: '+facturas[i].Telefono+'</div>';
-                    htmlzatia += '<div class="direccion">dirección: '+facturas[i].Direccion+'</div>';
+                    htmlzatia += '<div class="nombre">nombre: ' + facturas[i].Nombre + ' ' + facturas[i].Apellidos + '</div>';
+                    htmlzatia += '<div class="telefono">teléfono: ' + facturas[i].Telefono + '</div>';
+                    htmlzatia += '<div class="direccion">dirección: ' + facturas[i].Direccion + '</div>';
                     htmlzatia += '</div>';
-                    htmlzatia += '<div class="datosProducto>';
-                    htmlzatia += '<div class="cantidad">Cantidad:'+0+'</div>';
-                    htmlzatia += '<div class="total"><b>TOTAL:'+facturas[i].total+'</div>';
-                    htmlzatia += '</div>';
-                    htmlzatia += '</div>';
-                    $('.factura').append(htmlzatia);
-                }
-            $('.laukizuzena').on('click', function () {
+                    htmlzatia += '<div class="datosProductos">';
+                    
+                    for (j in linea) {
+                        for (k in productos) {
+                            if (facturas[i].id_factura == linea[j].id_factura && linea[j].id_producto == productos[k].id_producto) {
+                                cant = cant + linea[j].cantidad;
+                                
+                                htmlzatia += '<div class="row">';
+                                htmlzatia += '<div class="imagen"><img src="' + productos[k].imagen + '"></div>';
+                                htmlzatia += '<div class="productoNombre">' + productos[k].nombre + '</div>';
+                                htmlzatia += '</div>';
 
-
-                $('.laukizuzena[data-id="' + $(this).data('id') + '"]').children('.datosProducto').slideDown();
-                printProductos();
-
-            });
-
-            function printProductos() {
-                var htmlzatia = '';
-                for (j in facturas) {
-
-                    for (i in linea) {
-
-                        if (facturas[j].id == linea[i].id_producto) {
-                            console.log(facturas);
-                            htmlzatia = '<tr>';
-                            htmlzatia += '<td><img src="' + linea[i].imagen + '"></td>';
-                            htmlzatia += '<td>' + linea[i].nombre + '</td>';
-                            htmlzatia += '<td><div class="num">' + facturas[j].cant + '<div></td>';
-                            htmlzatia += '</tr>';
-                            $('.datosLineas').append(htmlzatia);
+                            }
                         }
                     }
-                }
-            }
+                        htmlzatia += '</div>';
+                        htmlzatia += '<div class="footer">';
+                        htmlzatia += '<div class="cantidad">Cantidad:' + cant + '</div>';
+                        htmlzatia += '<div class="total"><b>TOTAL:' + facturas[i].total + '</b></div>';
+                        htmlzatia += '</div>';
+                        htmlzatia += '</div>';
 
-        }
-    });
+                        $('.factura').append(htmlzatia);
+                    }
+            }
+            
+        });
 
 
     </script>

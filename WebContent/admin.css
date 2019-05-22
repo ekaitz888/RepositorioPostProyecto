@@ -1,17 +1,16 @@
 .factura{
     display: flex;
     flex-direction: column;
-    background-color: white;
+    
     
 }
 
 .laukizuzena{
     background-color: white;
-    margin: 8px;
+    margin-top: 8px;
     display: flex;
-    flex-wrap: nowrap;
-    width: 750px;
-    height: 250px;
+    flex-direction: column;
+    width: 1000px;
 }
 body{
     background-color: gray;
@@ -24,26 +23,16 @@ img{
     float: left;
     margin-left: 20px;
 }
-.compra{
-    background-color: palevioletred;
-    padding: 20px;
-    border-radius: 15px;
-    border: solid 1px palevioletred;
-    margin-top: 20px;
-}
+
 .background{
     margin-top: 50px; 
     display: flex;
     justify-content: center;
 }
-.datosPersonales{
-    display: flex;
-    flex-grow: 1;
-    flex-wrap: wrap;
-}
-.datosProducto{
-    display: flex;
-    flex-grow: 1;
+.datosProductos{
+    max-height: 250px;
+    overflow-y:scroll;
+    
 }
 .nombre{
    width: 100%;
@@ -54,7 +43,17 @@ img{
 .direccion{
    width: 100%;
 }
-.factura{
+.cantidad{
+    width: 100%;
+    text-align: end;
+    height: 50px;
+}
+.total{
+    width: 100%;
+    text-align: end;
+    height: 50px;
+}
+.cuerpo{
+    display: none;
     
 }
-
