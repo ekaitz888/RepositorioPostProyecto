@@ -46,10 +46,10 @@ public class CDeleteFactura extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setHeader("Access-Control-Allow-Origin", "*"); // json deia denean
-//		// ez da behar
-		 response.setContentType("application/json"); // json bihurtzeko erabiltzen da
-		 response.setCharacterEncoding("UTF-8");
+//		response.setHeader("Access-Control-Allow-Origin", "*"); // json deia denean
+////		// ez da behar
+//		 response.setContentType("application/json"); // json bihurtzeko erabiltzen da
+//		 response.setCharacterEncoding("UTF-8");
 		String arrFactura = request.getParameter("arrFactura");
 
 		JSONArray JSONArray = new JSONArray(arrFactura);
