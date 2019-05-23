@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2019 a las 09:10:35
+-- Tiempo de generación: 23-05-2019 a las 08:42:43
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.1.21
 
@@ -87,6 +87,14 @@ CREATE TABLE `factura` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Volcado de datos para la tabla `factura`
+--
+
+INSERT INTO `factura` (`id_factura`, `total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`) VALUES
+(47, 22860, 'ksda', 'jdklfsdklfbsa', '12345678', '94824', '43241'),
+(48, 22970, 'nombre', 'apelli2', '73137040', '2131', '43241');
+
+--
 -- Disparadores `factura`
 --
 DELIMITER $$
@@ -107,6 +115,34 @@ CREATE TABLE `linea` (
   `precio` double DEFAULT NULL,
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `linea`
+--
+
+INSERT INTO `linea` (`id_linea`, `id_factura`, `id_producto`, `precio`, `cantidad`) VALUES
+(62, 47, 1, 1210, 11),
+(63, 47, 3, 960, 12),
+(64, 47, 2, 320, 4),
+(65, 47, 4, 770, 7),
+(66, 47, 6, 400, 5),
+(67, 47, 5, 1980, 9),
+(68, 47, 8, 1260, 7),
+(69, 47, 9, 5040, 28),
+(70, 47, 7, 2080, 26),
+(71, 47, 11, 2720, 34),
+(72, 47, 10, 6120, 34),
+(73, 48, 1, 1320, 12),
+(74, 48, 3, 960, 12),
+(75, 48, 2, 320, 4),
+(76, 48, 4, 770, 7),
+(77, 48, 6, 400, 5),
+(78, 48, 5, 1980, 9),
+(79, 48, 8, 1260, 7),
+(80, 48, 9, 5040, 28),
+(81, 48, 7, 2080, 26),
+(82, 48, 11, 2720, 34),
+(83, 48, 10, 6120, 34);
 
 -- --------------------------------------------------------
 
@@ -171,7 +207,6 @@ INSERT INTO `producto` (`id_producto`, `Nombre`, `precio`, `id_marca`, `imagen`)
 
 CREATE TABLE `registro_factura` (
   `id_factura` int(11) NOT NULL,
-  `id_linea` int(11) NOT NULL,
   `total` int(11) NOT NULL,
   `Nombre` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `Apellidos` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
@@ -186,16 +221,20 @@ CREATE TABLE `registro_factura` (
 -- Volcado de datos para la tabla `registro_factura`
 --
 
-INSERT INTO `registro_factura` (`id_factura`, `id_linea`, `total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`, `Fecha_eliminacion`, `Usuario`) VALUES
-(1, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 134, '2019-05-21 14:48:11', 'root@localhost'),
-(2, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 54352, '2019-05-22 09:00:50', 'root@localhost'),
-(3, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 32431, '2019-05-22 09:00:50', 'root@localhost'),
-(4, 0, 760, '', '', 0, '', 0, '2019-05-22 09:00:50', 'root@localhost'),
-(5, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 532, '2019-05-22 09:00:50', 'root@localhost'),
-(6, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 31543, '2019-05-22 09:00:50', 'root@localhost'),
-(7, 0, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 324523, '2019-05-22 09:00:50', 'root@localhost'),
-(8, 0, 760, 'Asier', 'Gusmano Rodriguez', 12345678, 'Su puta casa', 312423532, '2019-05-22 09:04:08', 'root@localhost'),
-(9, 0, 22750, 'Asier', 'Gusmano Rodriguez', 12345678, 'Sillycon Valley', 254252, '2019-05-22 09:09:58', 'root@localhost');
+INSERT INTO `registro_factura` (`id_factura`, `total`, `Nombre`, `Apellidos`, `Telefono`, `Direccion`, `tarjetaCredito`, `Fecha_eliminacion`, `Usuario`) VALUES
+(1, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 134, '2019-05-21 14:48:11', 'root@localhost'),
+(2, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 54352, '2019-05-22 09:00:50', 'root@localhost'),
+(3, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 32431, '2019-05-22 09:00:50', 'root@localhost'),
+(4, 760, '', '', 0, '', 0, '2019-05-22 09:00:50', 'root@localhost'),
+(5, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 532, '2019-05-22 09:00:50', 'root@localhost'),
+(6, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 31543, '2019-05-22 09:00:50', 'root@localhost'),
+(7, 760, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 324523, '2019-05-22 09:00:50', 'root@localhost'),
+(8, 760, 'Asier', 'Gusmano Rodriguez', 12345678, 'Su puta casa', 312423532, '2019-05-22 09:04:08', 'root@localhost'),
+(9, 22750, 'Asier', 'Gusmano Rodriguez', 12345678, 'Sillycon Valley', 254252, '2019-05-22 09:09:58', 'root@localhost'),
+(10, 22750, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 65345, '2019-05-22 09:17:17', 'root@localhost'),
+(11, 22750, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 123425, '2019-05-22 09:17:17', 'root@localhost'),
+(12, 22750, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 123425, '2019-05-22 09:19:10', 'root@localhost'),
+(13, 22750, 'ksda', 'jdklfsdklfbsa', 12345678, '94824', 123425, '2019-05-22 09:19:15', 'root@localhost');
 
 --
 -- Índices para tablas volcadas
@@ -243,13 +282,13 @@ ALTER TABLE `registro_factura`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `linea`
 --
 ALTER TABLE `linea`
-  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT de la tabla `marca`
@@ -267,7 +306,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `registro_factura`
 --
 ALTER TABLE `registro_factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas

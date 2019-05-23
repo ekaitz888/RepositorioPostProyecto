@@ -119,7 +119,7 @@
                             console.log(total);  */
                             suma[i] = (response[num].precio * myCarrito[i].cant);
                             $(this).parent().parent().siblings('.precio').html(suma[i] + '€');
-                            
+
 
                             // console.log(suma[id])
                             total = total + response[num].precio;
@@ -173,17 +173,17 @@
                                 total = total - response[num].precio;
                                 console.log(total);
 
-                                
+
 
                                 $(this).parent('.cantidad').children('.num').html(myCarrito[i].cant);
                             }
                         }
 
                     }
-                    $(this).closest('.tabla').siblings('.footer').children(".total").html('<b>'+total + '€</b>');
+                    $(this).closest('.tabla').siblings('.footer').children(".total").html('<b>' + total + '€</b>');
                     myString = JSON.stringify(myCarrito);
                     localStorage.setItem("myCarrito", myString);
-                    
+
                 })
 
                 //Borrar producto
@@ -210,7 +210,7 @@
                     $(this).closest('.tabla').siblings('.footer').children(".total").html(total + '€');
 
                     $(this).closest("tr").fadeOut();
-                    
+
 
                 })
             }

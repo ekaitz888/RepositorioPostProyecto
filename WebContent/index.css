@@ -70,9 +70,7 @@ button{
 .precio{
     float: left;
 }
-.btn-primary{
-    background-color: grey;
-}
+
 
 .titulo{
     align-items: flex-end;
