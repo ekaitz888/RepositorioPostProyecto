@@ -50,37 +50,26 @@ public class CDeleteFactura extends HttpServlet {
 ////		// ez da behar
 //		 response.setContentType("application/json"); // json bihurtzeko erabiltzen da
 //		 response.setCharacterEncoding("UTF-8");
-		String arrFactura = request.getParameter("arrFactura");
+//		String arrFactura = request.getParameter("arrFactura");
+//
+//		JSONArray JSONArray = new JSONArray(arrFactura);
+//
+//		FacturaModel myFactura = new FacturaModel();
+//		LineaModel myLinea = new LineaModel();
+//		try {
+//			myLinea.LoadData();
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//
+//		try {
+//			myFactura.LoadData();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
-		JSONArray JSONArray = new JSONArray(arrFactura);
-
-		FacturaModel myFactura = new FacturaModel();
-		LineaModel myLinea = new LineaModel();
-		try {
-			myLinea.LoadData();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try {
-			myFactura.LoadData();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		for (int i = 0; i < JSONArray.length(); i++) {
-					myFactura.setId_factura(JSONArray.getJSONObject(i).getInt("id"));
-					try {
-						myFactura.deletetData();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			
 		
-	}
 
 }
